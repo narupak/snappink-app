@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
 import snappink from '../../assets/image/snappink.png';
 import styled from 'styled-components';
-import { Row, Col } from 'react-bootstrap';
 
 const LabelStyle = styled.div`
-  font-size : 14px;
+  font-size: 14px;
   font-family: Roboto;
   font-weight: bold;
-`
+`;
+const Profile = styled.div`
+  display: inline-flex;
+`;
 class UserProfile extends Component {
   render() {
     return (
-      <Row>
-        <Col lg="1">
-          <Row>
+      <Profile>
+        <div>
+          <div>
             <LabelStyle>John Doe</LabelStyle>
-          </Row>
-          <Row>
+          </div>
+          <div>
             <LabelStyle>Super Admin</LabelStyle>
-          </Row>
-        </Col>
+          </div>
+        </div>
+        <div>
           <img src={snappink} alt='logo' width='50px' />
-      </Row>
+        </div>
+      </Profile>
     );
   }
 }

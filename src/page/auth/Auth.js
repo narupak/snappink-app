@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import FormLogin from '../../component/form-login';
+import FormLogin from '../../component/form-login/FormLogin';
 
 const WallPaper = styled.div`
   background-color: #fbefef;

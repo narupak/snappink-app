@@ -5,8 +5,10 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Auth from './page/auth';
-import Template from './page/template';
+import Auth from './page/auth/Auth';
+import CreateClass from './page/create-class/CreateClass';
+import Template from './page/list-live-fit/ListLiveFit';
+import Live from './page/live/Live';
 
 function App() {
   return (
@@ -15,8 +17,14 @@ function App() {
           <Route path="/login">
             <Auth />
           </Route>
-          <Route path="/">
+          <Route path="/fit">
             <Template />
+          </Route>
+          <Route path="/createClass">
+            <CreateClass />
+          </Route>
+          <Route path="/">
+            <Live />
           </Route>
       </Switch>
     </Router>
