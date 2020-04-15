@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import Auth from './page/auth/Auth';
 import CreateClass from './page/create-class/CreateClass';
-import Template from './page/list-live-fit/ListLiveFit';
+import ListLiveFit from './page/list-live-fit/ListLiveFit';
+import StartLive from './page/start-live/StartLive';
 import Live from './page/live/Live';
 
 function App() {
@@ -18,13 +19,14 @@ function App() {
             <Auth />
           </Route>
           <Route path="/fit">
-            <Template />
+            <ListLiveFit />
           </Route>
           <Route path="/createClass">
             <CreateClass />
           </Route>
-          <Route path="/">
-            <Live />
+          <Route path="/:attendeeMode" component={Live}></Route>
+          <Route path="/ss">
+            <StartLive />
           </Route>
       </Switch>
     </Router>

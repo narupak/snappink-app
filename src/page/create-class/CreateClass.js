@@ -9,7 +9,6 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 
 const Body = styled.div`
   width: 100%;
-  height: 100%;
   background-color: #eeeeee;
   padding-left: 50px;
   padding-top: 20px;
