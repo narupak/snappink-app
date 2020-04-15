@@ -6,12 +6,12 @@ class Live extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoProfile : '480p_1',
-      channel : 'test',
+      videoProfile : '1440p_1',
+      channel : this.props.match.params.channel,
       transcode : 'interop',
-      attendeeMode : this.props.match.params.attendeeMode,
+      attendeeMode : 'video',
       baseMode : 'al',
-      appId : '8f252f1317184044836d2a18d3edc506',
+      appId : 'b0eee4d29b954766add16ff1f0dc8ef0',
       uid : undefined
     }
     // if (!this.appId) {
@@ -20,12 +20,12 @@ class Live extends Component {
   }
 
   componentDidMount() {
-    this.setState({attendeeMode : this.props.match.params.attendeeMode });
+    this.setState({channel : this.props.match.params.channel });
   }
 
-  componentWillReceiveProps(){
-    this.setState({attendeeMode : this.props.match.params.attendeeMode });
-  }
+  // componentWillReceiveProps(){
+  //   this.setState({attendeeMode : this.props.match.params.attendeeMode });
+  // }
 
   render() {
     return (

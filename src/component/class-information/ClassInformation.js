@@ -13,6 +13,7 @@ const HeaderPanel = styled.div`
   background-color: #f598a4;
   width: 100%;
   height: 15%;
+  border-radius : 5px;
 `;
 
 const BodyPanel = styled.div`
@@ -56,7 +57,7 @@ class ClassInformation extends Component {
               <Col lg={3}>
                 <Form.Control type='number' placeholder='' onChange={e => classInform.expireWithIn = e.target.value} />
               </Col>
-              <Form.Label>
+              <Form.Label style={{ marginLeft : "20px" }}>
                 <Row> Days</Row>
                 <Row> (count since join class data)</Row>
               </Form.Label>

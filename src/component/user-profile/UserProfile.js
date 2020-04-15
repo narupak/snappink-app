@@ -11,7 +11,12 @@ const LabelStyle = styled.div`
 const Profile = styled.div`
   display: inline-flex;
 `;
+
 class UserProfile extends Component {
+  logout(){
+    localStorage.clear();
+    window.location.reload();
+  }
   render() {
     return (
       <Profile>
@@ -26,7 +31,7 @@ class UserProfile extends Component {
         <div>{/* <img src={snappink} alt='logo' width='50px' /> */}</div>
         <div>
           <NavDropdown>
-            <NavDropdown.Item  href="#action/3.1">Logout</NavDropdown.Item>
+            <NavDropdown.Item onClick={this.logout}>Logout</NavDropdown.Item>
           </NavDropdown>
         </div>
       </Profile>

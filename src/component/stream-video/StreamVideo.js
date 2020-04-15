@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { merge } from 'lodash';
 import Clock from '../../component/clock/Clock';
+import {
+  Link
+} from "react-router-dom";
 
 import './canvas.css';
 import '../../assets/fonts/css/icons.css';
@@ -12,9 +15,10 @@ const TimeRecord = styled.div`
   background-color: white;
   position: absolute;
   top: 20px;
-  left: 650px;
+  left: 600px;
   padding: 5px;
   border-radius: 5px;
+  font-size: 20px;
 `;
 
 const ButtonStop = styled(Button)`
@@ -144,7 +148,6 @@ class StreamVideo extends Component {
   }
 
   streamInit = (uid, attendeeMode, videoProfile, config) => {
-    console.log('attendeeMode' + attendeeMode);
     let defaultConfig = {
       streamID: uid,
       audio: true,
@@ -397,13 +400,24 @@ class StreamVideo extends Component {
       </span>
     );
 
-    return (
-      <div id='ag-canvas' style={style}>
-        <div className='ag-btn-group'>
+    const modeVideo =
+      this.props.attendeeMode !== 'audience' ? (
+        <div>
           <TimeRecord>
             <Clock></Clock>
           </TimeRecord>
-          <ButtonStop>STOP</ButtonStop>
+          <Link to="/fit">
+            <ButtonStop>STOP</ButtonStop>
+          </Link>
+        </div>
+      ) : (
+        ''
+      );
+
+    return (
+      <div id='ag-canvas' style={style}>
+        <div className='ag-btn-group'>
+        {modeVideo}
         </div>
       </div>
     );

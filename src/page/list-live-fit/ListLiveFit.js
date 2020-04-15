@@ -5,6 +5,9 @@ import ButtonCreateClass from "../../component/button-create-class/ButtonCreateC
 import HeaderLiveFit from "../../component/header-live-fit/HeaderLiveFit";
 import { Col } from "react-bootstrap";
 import Table from "../../component/table-live-fit";
+import {
+  Link
+} from "react-router-dom";
 
 const Body = styled.div`
   width: 100%;
@@ -50,7 +53,9 @@ class ListLiveFit extends Component {
                 </ol>
               </Col>
               <div className="pt-3">
-                <ButtonCreateClass />
+                <Link to="/createClass">
+                  <ButtonCreateClass />
+                </Link>
               </div>
             </div>
           </div>

@@ -26,8 +26,8 @@ function App() {
         <Route path="/createClass">
           <CreateClass />
         </Route>
-        <Route path="/:attendeeMode" component={Live}></Route>
-        <Route path="/ss">
+        <Route path="/live/:channel" component={Live}></Route>
+        <Route path="/startLive">
           <StartLive />
         </Route>
       </Switch>
