@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import snappink from "../../assets/image/snappink.png";
 import LiveFit from "../../assets/image/liveFit.png";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import PropTypes from 'prop-types'
 
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -16,6 +17,10 @@ class FormLogin extends Component {
         password: "",
       },
     };
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
   handleCheckboxChange = (event) =>
@@ -38,6 +43,7 @@ class FormLogin extends Component {
         if (response.result) {
           this.hadleLoginSuccess(response.message);
           localStorage.setItem("user", JSON.stringify(response.result));
+          this.gotoUrl();
         } else {
           this.hadleLoginFail(response.message);
         }
