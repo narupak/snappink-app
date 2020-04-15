@@ -25,7 +25,6 @@ const BodyPanel = styled.div`
 `;
 
 const ButtonAddMore = styled(Button)`
-  background-color: #1e3064;
   color: white;
   font-size: 14px;
   font-family: Roboto;
@@ -181,6 +180,7 @@ class LiveSchedule extends Component {
             </Form.Group>
 
             <ButtonAddMore
+              style = {{ backgroundColor : "#1e3064" }}
               type='button'
               onClick={this.handleAddFormSchedule}
               className='small'

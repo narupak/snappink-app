@@ -31,7 +31,6 @@ const Footer = styled.div`
 `;
 
 const ButtonConfirm = styled(Button)`
-  background-color: #1e3064;
   color: white;
   font-size: 14px;
   font-family: Roboto;
@@ -40,7 +39,6 @@ const ButtonConfirm = styled(Button)`
 `;
 
 const ButtonCancel = styled(Button)`
-  background-color: #bbbbbb;
   color: white;
   font-size: 14px;
   font-family: Roboto;
@@ -170,11 +168,11 @@ class CreateClass extends Component {
             <LiveSchedule scheduleList={this.state.scheduleList}></LiveSchedule>
             <Footer>
               <Link to='/fit'>
-                <ButtonCancel type='button' onClick={this.clearForm}>
+                <ButtonCancel type='button' onClick={this.clearForm} style={{ backgroundColor: "#bbbbbb" }}>
                   Cancel
                 </ButtonCancel>
               </Link>
-              <ButtonConfirm type='button' onClick={this.handleSubmit}>
+              <ButtonConfirm type='button' onClick={this.handleSubmit} style={{ backgroundColor: "#1e3064" }} >
                 Save
               </ButtonConfirm>
             </Footer>

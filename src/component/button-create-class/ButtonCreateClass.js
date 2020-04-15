@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import plus from '../../assets/image/plus.png';
 
 const ButtonAdd = styled(Button)`
-    background-color: #F3A3AD;
     color: white;
     font-size: 14px;
     font-family: Roboto;
@@ -13,7 +12,7 @@ const ButtonAdd = styled(Button)`
 class ButtonCreateClass extends Component {
     render () {
         return (
-            <ButtonAdd>
+            <ButtonAdd style={{ backgroundColor : "#F3A3AD" }}>
                 <img src={plus} alt='Logo' />
                 Create Class
             </ButtonAdd>

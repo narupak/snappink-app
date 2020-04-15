@@ -23,7 +23,6 @@ const TimeRecord = styled.div`
 
 const ButtonStop = styled(Button)`
   width: 200px;
-  background-color: red;
   color: white;
   position: absolute;
   top: 550px;
@@ -407,7 +406,7 @@ class StreamVideo extends Component {
             <Clock></Clock>
           </TimeRecord>
           <Link to="/fit">
-            <ButtonStop>STOP</ButtonStop>
+            <ButtonStop style={{ backgroundColor : "#D75A4A" }} >STOP</ButtonStop>
           </Link>
         </div>
       ) : (

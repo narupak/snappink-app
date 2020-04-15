@@ -45,7 +45,6 @@ const LabelHeader = styled.div`
 `;
 
 const ButtonStartLive = styled(Button)`
-  background-color: #3ba080;
   color: white;
   font-size: 50px;
   font-family: Roboto;
@@ -114,7 +113,7 @@ class StartLive extends Component {
           </HeaderContent>
           <ContentLive>
             <Link to='/live/Cycling'>
-              <ButtonStartLive type='buton' onClick={this.handleJoin}>
+              <ButtonStartLive type='buton' onClick={this.handleJoin} style={{ backgroundColor : "#3ba080"}}>
                 START
               </ButtonStartLive>
             </Link>
