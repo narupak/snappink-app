@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import snappink from '../../assets/image/snappink.png';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import snappink from "../../assets/image/snappink.png";
+import styled from "styled-components";
+import { NavDropdown } from "react-bootstrap";
 
 const LabelStyle = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   font-family: Roboto;
   font-weight: bold;
 `;
@@ -22,8 +23,11 @@ class UserProfile extends Component {
             <LabelStyle>Super Admin</LabelStyle>
           </div>
         </div>
+        <div>{/* <img src={snappink} alt='logo' width='50px' /> */}</div>
         <div>
-          <img src={snappink} alt='logo' width='50px' />
+          <NavDropdown>
+            <NavDropdown.Item  href="#action/3.1">Logout</NavDropdown.Item>
+          </NavDropdown>
         </div>
       </Profile>
     );

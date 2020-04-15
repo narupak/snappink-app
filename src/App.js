@@ -13,6 +13,7 @@ import StartLive from "./page/start-live/StartLive";
 import Live from "./page/live/Live";
 
 function App() {
+  document.body.style.backgroundColor = "rgb(247, 247, 250)";
   return (
     <Router>
       <Switch>

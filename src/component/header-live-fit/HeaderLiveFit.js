@@ -7,7 +7,11 @@ import UserProfile from '../user-profile/UserProfile';
 const Header = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: white;
 `;
 const HeaderSideLeft = styled.div`
   text-align: left;
@@ -22,11 +26,11 @@ class HeaderLiveFit extends Component {
     return (
       <Header>
         <HeaderSideLeft>
-          <img src={snappink} alt='Logo' width='50px' />
-          <img src={xLiveFit} alt='Logo' width='80px' />
+          <img src={snappink} alt='Logo' width='60px' />
+          <img style={{marginLeft:"20px"}} src={xLiveFit} height='25px' alt='Logo' width='100px' />
         </HeaderSideLeft>
         <HeaderSideRight>
-          <UserProfile></UserProfile>
+          <UserProfile/>
         </HeaderSideRight>
       </Header>
     );

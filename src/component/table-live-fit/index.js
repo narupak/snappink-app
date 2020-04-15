@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 import IconSort from "./icons";
-import "./styles.css";
 
 const customStyles = {
   headCells: {
@@ -94,8 +93,8 @@ class Table extends Component {
       .then((res) => res.json())
       .then((data) => {
         if (data.message === "Get gym class success.") {
-          this.setState({ allData: data.r });
-          const tmp = data.results.map((val,index) => {
+          console.log(data)
+          const tmp = data.result.items.map((val,index) => {
              return {
               id: val.id,
               index : index+1,
@@ -107,10 +106,8 @@ class Table extends Component {
               liveTime: "-",
               liveDate: "-",
             };
-
           });
           this.setState({ allData : tmp });
-          console.log(this.state.allData)
         }
       })
       .catch(console.log);
