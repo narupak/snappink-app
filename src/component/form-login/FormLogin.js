@@ -43,7 +43,7 @@ class FormLogin extends Component {
         if (response.result) {
           this.hadleLoginSuccess(response.message);
           localStorage.setItem("user", JSON.stringify(response.result));
-          this.gotoUrl();
+          this.props.history.push(`/fit`)
         } else {
           this.hadleLoginFail(response.message);
         }

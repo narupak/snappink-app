@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Button } from "react-bootstrap";
 
 class Clock extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       time: {
         hour: 0,
@@ -41,6 +42,10 @@ class Clock extends Component {
 
   componentWillUnmount() {
     this.setState({ hour: 0, minute: 0, second: 0 });
+  }
+
+  startTime(){
+      this.setState({ time : this.getTime() })
   }
 
   render() {

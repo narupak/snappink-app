@@ -12,7 +12,7 @@ class Login extends Component {
     return (
       <div className='App'>
         <WallPaper>
-            <FormLogin/>
+            <FormLogin {...this.props}/>
         </WallPaper>
       </div>
     );
