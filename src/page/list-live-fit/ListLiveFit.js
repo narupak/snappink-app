@@ -4,6 +4,7 @@ import group from '../../assets/image/group.png';
 import ButtonCreateClass from '../../component/button-create-class/ButtonCreateClass';
 import HeaderLiveFit from '../../component/header-live-fit/HeaderLiveFit';
 import { Row } from 'react-bootstrap';
+import Table from '../../component/table-live-fit'
 
 const HeaderSideLeft = styled.div`
   text-align: left;
@@ -14,7 +15,6 @@ const HeaderSideRight = styled.div`
 `;
 const Body = styled.div`
   width: 100%;
-  height: 100vh;
   background-color: #eeeeee;
   padding-left: 50px;
   padding-top: 20px;
@@ -30,7 +30,8 @@ const LabelStyle = styled.div`
 const TableBody = styled.div`
   width: 100%;
   background-color: white;
-  height: 80vh;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const HeaderBody = styled.div`
@@ -55,7 +56,9 @@ class Template extends Component {
               <ButtonCreateClass></ButtonCreateClass>
             </HeaderSideRight>
           </HeaderBody>
-          <TableBody></TableBody>
+          <TableBody>
+            <Table/>
+          </TableBody>
         </Body>
       </div>
     );

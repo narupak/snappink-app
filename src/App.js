@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <Switch>
-          <Route path="/login">
+          <Route path="/">
             <Auth />
           </Route>
           <Route path="/fit">
