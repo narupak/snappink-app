@@ -1,7 +1,6 @@
 import StreamVideo from '../../component/stream-video/StreamVideo';
 import React, { Component } from 'react';
 import "./meeting.css";
-import * as Cookies from 'js-cookie';
 class Live extends Component {
   constructor(props) {
     super(props);

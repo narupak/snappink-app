@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import HeaderLiveFit from '../../component/header-live-fit/HeaderLiveFit';
 import group from '../../assets/image/group.png';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import * as Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';

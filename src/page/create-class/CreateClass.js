@@ -4,8 +4,10 @@ import HeaderLiveFit from '../../component/header-live-fit/HeaderLiveFit';
 import ClassInformation from '../../component/class-information/ClassInformation';
 import LiveSchedule from '../../component/live-schedule/LiveSchedule';
 import group from '../../assets/image/group.png';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { store } from "react-notifications-component";
+import ReactNotification from "react-notifications-component";
 import {
   Link
 } from "react-router-dom";
@@ -77,25 +79,6 @@ class CreateClass extends Component {
     };
   }
 
-  clearForm = () => {
-    this.setState({
-      classInform: {
-        className: '',
-        trainerName: '',
-        expireWithIn: 0,
-        price: 0,
-        time: 0,
-      },
-      scheduleList: [
-        {
-          day: { label: 'Choose day', value: '9' },
-          start: { label: 'Choose time', value: '9' },
-          stop: { label: 'Choose time', value: '9' },
-        },
-      ],
-    });
-  };
-
   handleSubmit = () => {
     // const formRequest = new
     // let formData = new FormData();
@@ -138,11 +121,57 @@ class CreateClass extends Component {
       });
   };
 
+  formValidMessage = (message) => {
+    store.addNotification({
+      title: <div style={{ textAlign: "left", color: "white" }}>Warning !</div>,
+      message: (
+        <div style={{ textAlign: "left", color: "white" }}>{message}</div>
+      ),
+      type: "warning",
+      container: "top-right",
+      insert: "top",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: {
+        duration: 2000,
+      },
+    });
+  };
+
+  hadleFormCheck = () => {
+    this.state.formLogin.email && this.state.formLogin.password
+      ? this.handleSubmit()
+      : this.checkForm();
+  };
+
+  checkForm = () => {
+    let warning = ""
+    if ( this.state.classInform.className === ""){
+      warning += "Please ,Enter your ClassName. \r\n"
+    }
+    if ( this.state.classInform.trainerName === ""){
+      warning += "Please ,Enter your TrainerName. \n"
+    }
+    if ( this.state.classInform.expireWithIn === 0 ){
+      warning += "Please ,Enter your Expire. \n"
+    }
+    if ( this.state.classInform.price === 0 ){
+      warning += "Please ,Enter your Price. \n"
+    }
+    if ( this.state.classInform.time === 0 ){
+      warning += "Please ,Enter your Time. \n"
+    }
+
+    console.log(warning);
+    this.formValidMessage(warning)
+  };
+
   render() {
     return (
       <div>
         <HeaderLiveFit />
         <Body>
+        <ReactNotification />
           <div style={{ width: '100%' }}>
             <div className='row pt-3 pb-3 pl-5 pr-5 ml-2 mr-2'>
               <img src={group} alt='Logo' width='50px' />
@@ -168,11 +197,11 @@ class CreateClass extends Component {
             <LiveSchedule scheduleList={this.state.scheduleList}></LiveSchedule>
             <Footer>
               <Link to='/fit'>
-                <ButtonCancel type='button' onClick={this.clearForm} style={{ backgroundColor: "#bbbbbb" }}>
+                <ButtonCancel type='button'  style={{ backgroundColor: "#bbbbbb" }}>
                   Cancel
                 </ButtonCancel>
               </Link>
-              <ButtonConfirm type='button' onClick={this.handleSubmit} style={{ backgroundColor: "#1e3064" }} >
+              <ButtonConfirm type='button' onClick={this.checkForm} style={{ backgroundColor: "#1e3064" }} >
                 Save
               </ButtonConfirm>
             </Footer>

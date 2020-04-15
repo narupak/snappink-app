@@ -124,12 +124,12 @@ class StreamVideo extends Component {
           );
         }
 
-        item.player.resize && item.player.resize();
+        return item.player.resize && item.player.resize();
       });
     }
-    // screen share mode (tbd)
-    else if (this.state.displayMode === 'share') {
-    }
+    // // screen share mode (tbd)
+    // else {
+    // }
   }
 
   componentWillUnmount() {
@@ -224,6 +224,7 @@ class StreamVideo extends Component {
           streamList: tempList,
         });
       }
+      return null;
     });
   };
 
@@ -245,84 +246,84 @@ class StreamVideo extends Component {
     }
   };
 
-  handleCamera = (e) => {
-    e.currentTarget.classList.toggle('off');
-    this.localStream.isVideoOn()
-      ? this.localStream.disableVideo()
-      : this.localStream.enableVideo();
-  };
+  // handleCamera = (e) => {
+  //   e.currentTarget.classList.toggle('off');
+  //   this.localStream.isVideoOn()
+  //     ? this.localStream.disableVideo()
+  //     : this.localStream.enableVideo();
+  // };
 
-  handleMic = (e) => {
-    e.currentTarget.classList.toggle('off');
-    this.localStream.isAudioOn()
-      ? this.localStream.disableAudio()
-      : this.localStream.enableAudio();
-  };
+  // handleMic = (e) => {
+  //   e.currentTarget.classList.toggle('off');
+  //   this.localStream.isAudioOn()
+  //     ? this.localStream.disableAudio()
+  //     : this.localStream.enableAudio();
+  // };
 
-  switchDisplay = (e) => {
-    if (
-      e.currentTarget.classList.contains('disabled') ||
-      this.state.streamList.length <= 1
-    ) {
-      return;
-    }
-    if (this.state.displayMode === 'pip') {
-      this.setState({ displayMode: 'tile' });
-    } else if (this.state.displayMode === 'tile') {
-      this.setState({ displayMode: 'pip' });
-    } else if (this.state.displayMode === 'share') {
-      // do nothing or alert, tbd
-    } else {
-      console.error('Display Mode can only be tile/pip/share');
-    }
-  };
+  // switchDisplay = (e) => {
+  //   if (
+  //     e.currentTarget.classList.contains('disabled') ||
+  //     this.state.streamList.length <= 1
+  //   ) {
+  //     return;
+  //   }
+  //   if (this.state.displayMode === 'pip') {
+  //     this.setState({ displayMode: 'tile' });
+  //   } else if (this.state.displayMode === 'tile') {
+  //     this.setState({ displayMode: 'pip' });
+  //   } else if (this.state.displayMode === 'share') {
+  //     // do nothing or alert, tbd
+  //   } else {
+  //     console.error('Display Mode can only be tile/pip/share');
+  //   }
+  // };
 
-  hideRemote = (e) => {
-    if (
-      e.currentTarget.classList.contains('disabled') ||
-      this.state.streamList.length <= 1
-    ) {
-      return;
-    }
-    let list;
-    let id = this.state.streamList[this.state.streamList.length - 1].getId();
-    list = Array.from(
-      document.querySelectorAll(`.ag-item:not(#ag-item-${id})`)
-    );
-    list.map((item) => {
-      if (item.style.display !== 'none') {
-        item.style.display = 'none';
-      } else {
-        item.style.display = 'block';
-      }
-      return item;
-    });
-  };
+  // hideRemote = (e) => {
+  //   if (
+  //     e.currentTarget.classList.contains('disabled') ||
+  //     this.state.streamList.length <= 1
+  //   ) {
+  //     return;
+  //   }
+  //   let list;
+  //   let id = this.state.streamList[this.state.streamList.length - 1].getId();
+  //   list = Array.from(
+  //     document.querySelectorAll(`.ag-item:not(#ag-item-${id})`)
+  //   );
+  //   list.map((item) => {
+  //     if (item.style.display !== 'none') {
+  //       item.style.display = 'none';
+  //     } else {
+  //       item.style.display = 'block';
+  //     }
+  //     return item;
+  //   });
+  // };
 
-  handleExit = (e) => {
-    if (e.currentTarget.classList.contains('disabled')) {
-      return;
-    }
-    try {
-      this.client && this.client.unpublish(this.localStream);
-      this.localStream && this.localStream.close();
-      this.client &&
-        this.client.leave(
-          () => {
-            console.log('Client succeed to leave.');
-          },
-          () => {
-            console.log('Client failed to leave.');
-          }
-        );
-    } finally {
-      this.setState({ readyState: false });
-      this.client = null;
-      this.localStream = null;
-      // redirect to index
-      window.location.hash = '';
-    }
-  };
+  // handleExit = (e) => {
+  //   if (e.currentTarget.classList.contains('disabled')) {
+  //     return;
+  //   }
+  //   try {
+  //     this.client && this.client.unpublish(this.localStream);
+  //     this.localStream && this.localStream.close();
+  //     this.client &&
+  //       this.client.leave(
+  //         () => {
+  //           console.log('Client succeed to leave.');
+  //         },
+  //         () => {
+  //           console.log('Client failed to leave.');
+  //         }
+  //       );
+  //   } finally {
+  //     this.setState({ readyState: false });
+  //     this.client = null;
+  //     this.localStream = null;
+  //     // redirect to index
+  //     window.location.hash = '';
+  //   }
+  // };
 
   render() {
     const style = {
@@ -333,71 +334,71 @@ class StreamVideo extends Component {
       gridTemplateRows: 'repeat(12, auto)',
       gridTemplateColumns: 'repeat(24, auto)',
     };
-    const videoControlBtn =
-      this.props.attendeeMode === 'video' ? (
-        <span
-          onClick={this.handleCamera}
-          className='ag-btn videoControlBtn'
-          title='Enable/Disable Video'
-        >
-          <i className='ag-icon ag-icon-camera'></i>
-          <i className='ag-icon ag-icon-camera-off'></i>
-        </span>
-      ) : (
-        ''
-      );
+    // const videoControlBtn =
+    //   this.props.attendeeMode === 'video' ? (
+    //     <span
+    //       onClick={this.handleCamera}
+    //       className='ag-btn videoControlBtn'
+    //       title='Enable/Disable Video'
+    //     >
+    //       <i className='ag-icon ag-icon-camera'></i>
+    //       <i className='ag-icon ag-icon-camera-off'></i>
+    //     </span>
+    //   ) : (
+    //     ''
+    //   );
 
-    const audioControlBtn =
-      this.props.attendeeMode !== 'audience' ? (
-        <span
-          onClick={this.handleMic}
-          className='ag-btn audioControlBtn'
-          title='Enable/Disable Audio'
-        >
-          <i className='ag-icon ag-icon-mic'></i>
-          <i className='ag-icon ag-icon-mic-off'></i>
-        </span>
-      ) : (
-        ''
-      );
+    // const audioControlBtn =
+    //   this.props.attendeeMode !== 'audience' ? (
+    //     <span
+    //       onClick={this.handleMic}
+    //       className='ag-btn audioControlBtn'
+    //       title='Enable/Disable Audio'
+    //     >
+    //       <i className='ag-icon ag-icon-mic'></i>
+    //       <i className='ag-icon ag-icon-mic-off'></i>
+    //     </span>
+    //   ) : (
+    //     ''
+    //   );
 
-    const switchDisplayBtn = (
-      <span
-        onClick={this.switchDisplay}
-        className={
-          this.state.streamList.length > 4
-            ? 'ag-btn displayModeBtn disabled'
-            : 'ag-btn displayModeBtn'
-        }
-        title='Switch Display Mode'
-      >
-        <i className='ag-icon ag-icon-switch-display'></i>
-      </span>
-    );
-    const hideRemoteBtn = (
-      <span
-        className={
-          this.state.streamList.length > 4 || this.state.displayMode !== 'pip'
-            ? 'ag-btn disableRemoteBtn disabled'
-            : 'ag-btn disableRemoteBtn'
-        }
-        onClick={this.hideRemote}
-        title='Hide Remote Stream'
-      >
-        <i className='ag-icon ag-icon-remove-pip'></i>
-      </span>
-    );
-    const exitBtn = (
-      <span
-        onClick={this.handleExit}
-        className={
-          this.state.readyState ? 'ag-btn exitBtn' : 'ag-btn exitBtn disabled'
-        }
-        title='Exit'
-      >
-        <i className='ag-icon ag-icon-leave'></i>
-      </span>
-    );
+    // const switchDisplayBtn = (
+    //   <span
+    //     onClick={this.switchDisplay}
+    //     className={
+    //       this.state.streamList.length > 4
+    //         ? 'ag-btn displayModeBtn disabled'
+    //         : 'ag-btn displayModeBtn'
+    //     }
+    //     title='Switch Display Mode'
+    //   >
+    //     <i className='ag-icon ag-icon-switch-display'></i>
+    //   </span>
+    // );
+    // const hideRemoteBtn = (
+    //   <span
+    //     className={
+    //       this.state.streamList.length > 4 || this.state.displayMode !== 'pip'
+    //         ? 'ag-btn disableRemoteBtn disabled'
+    //         : 'ag-btn disableRemoteBtn'
+    //     }
+    //     onClick={this.hideRemote}
+    //     title='Hide Remote Stream'
+    //   >
+    //     <i className='ag-icon ag-icon-remove-pip'></i>
+    //   </span>
+    // );
+    // const exitBtn = (
+    //   <span
+    //     onClick={this.handleExit}
+    //     className={
+    //       this.state.readyState ? 'ag-btn exitBtn' : 'ag-btn exitBtn disabled'
+    //     }
+    //     title='Exit'
+    //   >
+    //     <i className='ag-icon ag-icon-leave'></i>
+    //   </span>
+    // );
 
     const modeVideo =
       this.props.attendeeMode !== 'audience' ? (

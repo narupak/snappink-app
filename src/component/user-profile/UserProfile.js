@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import snappink from "../../assets/image/snappink.png";
 import styled from "styled-components";
 import { NavDropdown } from "react-bootstrap";
 
