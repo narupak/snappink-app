@@ -1,28 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { Form, Row, Col } from 'react-bootstrap';
+import { Panel,HeaderPanel,BodyPanel } from './styled';
 
-const Panel = styled.div`
-  width: 100%;
-  height: 50vh;
-  padding: 50px;
-`;
-const HeaderPanel = styled.div`
-  padding-left: 10px;
-  padding-top: 5px;
-  background-color: #f598a4;
-  width: 100%;
-  height: 15%;
-  border-radius : 5px;
-`;
-
-const BodyPanel = styled.div`
-  width: 100%;
-  hight: 50%;
-  padding-left: 50px;
-  padding-top: 20px;
-`;
-class ClassInformation extends Component {
+export class ClassInformation extends Component {
   render() {
     
     const classInform = this.props.classInform
@@ -79,5 +59,3 @@ class ClassInformation extends Component {
     );
   }
 }
-
-export default ClassInformation;

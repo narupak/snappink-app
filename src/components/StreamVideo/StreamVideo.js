@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import AgoraRTC from 'agora-rtc-sdk';
-import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
 import { merge } from 'lodash';
-import Clock from '../clock/Clock';
+import { Clock } from '../Clock';
+import { TimeRecord , ButtonStop } from './styled';
 import {
   Link
 } from "react-router-dom";
@@ -11,28 +10,7 @@ import {
 import './canvas.css';
 import '../../assets/fonts/css/icons.css';
 
-const TimeRecord = styled.div`
-  background-color: white;
-  position: absolute;
-  top: 20px;
-  left: 600px;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 20px;
-`;
-
-const ButtonStop = styled(Button)`
-  width: 200px;
-  color: white;
-  position: absolute;
-  top: 550px;
-  right: 50px;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 30px;
-`;
-
-class StreamVideo extends Component {
+export class StreamVideo extends Component {
   constructor(props) {
     super(props);
     this.client = {};
@@ -423,5 +401,3 @@ class StreamVideo extends Component {
     );
   }
 }
-
-export default StreamVideo;

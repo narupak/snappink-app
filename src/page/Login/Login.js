@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormLogin from '../../components/form-login/FormLogin';
+import { FormLogin } from '../../components';
 import {
   WallPaper
 } from './styled'

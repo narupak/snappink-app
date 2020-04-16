@@ -104,7 +104,7 @@ createTheme("solarized", {
   },
 });
 
-class Table extends Component {
+export class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -201,5 +201,3 @@ class Table extends Component {
     );
   }
 }
-
-export default Table;

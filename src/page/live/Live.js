@@ -1,5 +1,5 @@
-import StreamVideo from '../../components/stream-video/StreamVideo';
 import React, { Component } from 'react';
+import { StreamVideo } from '../../components';
 import "./meeting.css";
 class Live extends Component {
   constructor(props) {
@@ -13,18 +13,11 @@ class Live extends Component {
       appId : 'b0eee4d29b954766add16ff1f0dc8ef0',
       uid : undefined
     }
-    // if (!this.appId) {
-    //   return alert("Get App ID first!");
-    // }
   }
 
   componentDidMount() {
     this.setState({channel : this.props.match.params.channel });
   }
-
-  // componentWillReceiveProps(){
-  //   this.setState({attendeeMode : this.props.match.params.attendeeMode });
-  // }
 
   render() {
     return (

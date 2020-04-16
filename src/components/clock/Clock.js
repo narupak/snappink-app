@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactStopwatch from 'react-stopwatch';
 
-class Clock extends Component {
+export class Clock extends Component {
 
   render() {
     return (
@@ -22,5 +22,3 @@ class Clock extends Component {
     );
   }
 }
-
-export default Clock;

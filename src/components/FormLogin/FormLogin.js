@@ -8,7 +8,7 @@ import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { store } from "react-notifications-component";
 
-class FormLogin extends Component {
+export class FormLogin extends Component {
   constructor() {
     super();
     this.state = {
@@ -214,4 +214,3 @@ class FormLogin extends Component {
   }
 }
 
-export default FormLogin;

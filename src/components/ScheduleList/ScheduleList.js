@@ -4,7 +4,7 @@ import { DatePickerInput } from '../DatePickerInput';
 import { CONSTANTS } from '../../helpers';
 import { Form, Row, Col} from 'react-bootstrap';
 
-class ScheduleList extends Component {
+export class ScheduleList extends Component {
   render() {
     const { e, i, onChangeSelectInList, onChangeDateInList } = this.props;
     return (
@@ -63,5 +63,3 @@ class ScheduleList extends Component {
     );
   }
 }
-
-export default ScheduleList;

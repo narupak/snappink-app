@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderLiveFit from '../../components/header-live-fit/HeaderLiveFit';
+import { HeaderLiveFit } from '../../components';
 import group from '../../assets/image/group.png';
 import { Col } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';

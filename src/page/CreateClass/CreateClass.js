@@ -1,91 +1,24 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import HeaderLiveFit from '../../components/header-live-fit/HeaderLiveFit';
-import ClassInformation from '../../components/class-information/ClassInformation';
+import { ClassInformation,HeaderLiveFit,ScheduleList } from '../../components';
 import group from '../../assets/image/group.png';
-import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Form, Col, Row } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import { store } from 'react-notifications-component';
 import ReactNotification from 'react-notifications-component';
 import { Link } from 'react-router-dom';
 import plus from '../../assets/image/plus.png';
-import ScheduleList from '../../components/schedule-list/ScheduleList';
+import { GymClassService } from '../../service/api';
 import {
-  GymClassService
-} from '../../service/api'
-
-const Body = styled.div`
-  width: 100%;
-`;
-
-const LabelStyle = styled.div`
-  font-size: 22px;
-  font-family: Roboto;
-  font-weight: bold;
-  margin-bottom: 0px;
-  color: rgb(30, 48, 100);
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  height: 10vh;
-  text-align: right;
-`;
-
-const ButtonConfirm = styled(Button)`
-  color: white;
-  font-size: 14px;
-  font-family: Roboto;
-  font-weight: bold;
-  margin-left: 30px;
-`;
-
-const ButtonCancel = styled(Button)`
-  color: white;
-  font-size: 14px;
-  font-family: Roboto;
-  font-weight: bold;
-  margin-left: 50px;
-`;
-
-const Content = styled.div`
-  background-color: white;
-  margin-top: 10px;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-`;
-
-const Panel = styled.div`
-  width: 100%;
-  height: 50vh;
-  padding: 50px;
-`;
-const HeaderPanel = styled.div`
-  padding-left: 10px;
-  padding-top: 5px;
-  background-color: #f598a4;
-  width: 100%;
-  height: 15%;
-  border-radius: 5px;
-`;
-
-const BodyPanel = styled.div`
-  width: 100%;
-  hight: 50%;
-  padding-left: 50px;
-  padding-top: 20px;
-`;
-
-const ButtonAddMore = styled(Button)`
-  color: white;
-  font-size: 14px;
-  font-family: Roboto;
-  font-weight: bold;
-  margin-left: 400px;
-`;
+  Body,
+  LabelStyle,
+  Footer,
+  ButtonConfirm,
+  ButtonCancel,
+  Content,
+  Panel,
+  HeaderPanel,
+  BodyPanel,
+  ButtonAddMore,
+} from './styled';
 
 class CreateClass extends Component {
   constructor(props) {
@@ -166,9 +99,9 @@ class CreateClass extends Component {
         };
         const formData = new FormData();
         formData.append('request', JSON.stringify(request));
-        const gymClassService = GymClassService({isShowToastSuccess: true})
-        const res = await gymClassService.createClass(formData)
-        if(res) {
+        const gymClassService = GymClassService({ isShowToastSuccess: true });
+        const res = await gymClassService.createClass(formData);
+        if (res) {
           console.log(res);
           // setLoadingRedux(false)
           // redirect(ROUTE_PATH.PARTNER.LINK)

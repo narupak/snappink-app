@@ -1,27 +1,10 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import snappink from '../../assets/image/snappink.png';
 import xLiveFit from '../../assets/image/xLiveFit.png';
-import UserProfile from '../user-profile/UserProfile';
+import { UserProfile } from '../UserProfile';
+import { Header, HeaderSideLeft, HeaderSideRight} from './styled';
 
-const Header = styled.div`
-  width: 100%;
-  height: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: white;
-`;
-const HeaderSideLeft = styled.div`
-  text-align: left;
-  float: left;
-`;
-const HeaderSideRight = styled.div`
-  text-align: right;
-`;
-
-class HeaderLiveFit extends Component {
+export class HeaderLiveFit extends Component {
   render() {
     return (
       <Header>
@@ -36,5 +19,3 @@ class HeaderLiveFit extends Component {
     );
   }
 }
-
-export default HeaderLiveFit;
