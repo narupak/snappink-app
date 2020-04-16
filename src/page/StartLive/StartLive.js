@@ -1,10 +1,10 @@
-import React, { Component } from './node_modules/react';
+import React, { Component } from 'react';
 import HeaderLiveFit from '../../components/header-live-fit/HeaderLiveFit';
 import group from '../../assets/image/group.png';
-import { Col } from './node_modules/react-bootstrap';
-import Breadcrumb from './node_modules/react-bootstrap/Breadcrumb';
-import * as Cookies from './node_modules/js-cookie';
-import { Link } from './node_modules/react-router-dom';
+import { Col } from 'react-bootstrap';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import * as Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 import {
   Body,
   LabelStyle,

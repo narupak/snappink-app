@@ -5,10 +5,6 @@ import { CONSTANTS } from '../../helpers';
 import { Form, Row, Col} from 'react-bootstrap';
 
 class ScheduleList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { e, i, onChangeSelectInList, onChangeDateInList } = this.props;
     return (

@@ -1,5 +1,5 @@
 import StreamVideo from '../../components/stream-video/StreamVideo';
-import React, { Component } from './node_modules/react';
+import React, { Component } from 'react';
 import "./meeting.css";
 class Live extends Component {
   constructor(props) {
