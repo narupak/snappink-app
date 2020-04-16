@@ -6,10 +6,10 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Auth from "./page/auth/Auth";
+import Login from "./page/Login/Login";
 import CreateClass from "./page/create-class/CreateClass";
-import ListLiveFit from "./page/list-live-fit/ListLiveFit";
-import StartLive from "./page/start-live/StartLive";
+import ClassList from "./page/classList/ClassList";
+import StartLive from "./page/startLive/StartLive";
 import Live from "./page/live/Live";
 
 function App() {
@@ -17,10 +17,10 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact={true} path="/" render={(props) => <Auth {...props} />} />
+        <Route exact={true} path="/" render={(props) => <Login {...props} />} />
         <Route exact={true}
           render={() => {
-            if (localStorage.getItem("user")) return <ListLiveFit />;
+            if (localStorage.getItem("user")) return <ClassList />;
             else return <Redirect from='/fit' to='/'/>;
           }} path="/fit"/>
         <Route path="/createClass">

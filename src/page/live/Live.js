@@ -1,4 +1,4 @@
-import StreamVideo from '../../component/stream-video/StreamVideo';
+import StreamVideo from '../../components/stream-video/StreamVideo';
 import React, { Component } from 'react';
 import "./meeting.css";
 class Live extends Component {
