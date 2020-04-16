@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from "./node_modules/react";
 import group from "../../assets/image/group.png";
 import ButtonCreateClass from "../../components/button-create-class/ButtonCreateClass";
 import HeaderLiveFit from "../../components/header-live-fit/HeaderLiveFit";
-import { Col } from "react-bootstrap";
+import { Col } from "./node_modules/react-bootstrap";
 import Table from "../../components/table-live-fit";
 import {
   Link
-} from "react-router-dom";
+} from "./node_modules/react-router-dom";
 import { Body , LabelStyle , TableBody } from './styled'
 
 

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import styled from './node_modules/styled-components';
+import { Button } from './node_modules/react-bootstrap';
 
 export const Body = styled.div`
   width: 100%;

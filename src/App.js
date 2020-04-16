@@ -7,10 +7,10 @@ import {
   Redirect,
 } from "react-router-dom";
 import Login from "./page/Login/Login";
-import CreateClass from "./page/create-class/CreateClass";
-import ClassList from "./page/classList/ClassList";
-import StartLive from "./page/startLive/StartLive";
-import Live from "./page/live/Live";
+import CreateClass from "./page/CreateClass/CreateClass";
+import ClassList from "./page/ClassList/ClassList";
+import StartLive from "./page/StartLive/StartLive";
+import Live from "./page/Live/Live";
 
 function App() {
   document.body.style.backgroundColor = "rgb(247, 247, 250)";
