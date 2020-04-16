@@ -1,9 +1,45 @@
-.sc-fznMAR ,.sc-fzoyTs , .hsnfCS{
-    display: none;
+.sc-fznMAR,
+.sc-fzoyTs,
+.hsnfCS {
+  display: none;
 }
-.rdt_TableRow:nth-child(odd){
-    background-color: rgb(247, 247, 247);
+.rdt_TableRow:nth-child(odd) {
+  background-color: rgb(247, 247, 247);
 }
-div{
-    color: rgb(30, 48, 100)
+div {
+  color: rgb(30, 48, 100);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 100px;
+  padding-right: 0;
+}
+
+.pagination {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.pagination a {
+  color: rgb(68, 80, 99);
+  float: left;
+  padding: 4px 12px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.pagination li.disabled a {
+  color: rgb(178, 178, 178);
+  cursor: context-menu;
+}
+
+.pagination li.active {
+  background-color: rgb(113, 133, 165);
+}
+
+.pagination li.active a {
+  color: white;
 }
