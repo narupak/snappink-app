@@ -19,26 +19,17 @@ class StartLive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      joinBtn: false,
-      channel: '',
-      baseMode: 'avc',
-      transcode: 'interop',
-      attendeeMode: 'video',
-      videoProfile: '480p_4',
+      id: this.props.match.params.id,
+      channel: this.props.match.params.channel
     };
   }
 
-  handleJoin = () => {
-    if (!this.state.joinBtn) {
-      return;
-    }
-    console.log(this.state);
-    Cookies.set('channel', this.state.channel);
-    Cookies.set('baseMode', this.state.baseMode);
-    Cookies.set('transcode', this.state.transcode);
-    Cookies.set('attendeeMode', this.state.attendeeMode);
-    Cookies.set('videoProfile', this.state.videoProfile);
-    window.location.hash = 'live';
+  func = {
+    event: {
+      toLive: () => {
+        window.location.href = `/live/${this.state.id}/${this.state.channel}`;
+      },
+    },
   };
 
   render() {
@@ -68,15 +59,13 @@ class StartLive extends Component {
             <LabelHeader>Advance Flow Yoga</LabelHeader>
           </HeaderContent>
           <ContentLive>
-            <Link to='/live/test'>
-              <ButtonStartLive
-                type='buton'
-                onClick={this.handleJoin}
-                style={{ backgroundColor: '#3ba080' }}
-              >
-                START
-              </ButtonStartLive>
-            </Link>
+            <ButtonStartLive
+              type='buton'
+              onClick={this.func.event.toLive}
+              style={{ backgroundColor: '#3ba080' }}
+            >
+              START
+            </ButtonStartLive>
           </ContentLive>
         </Content>
       </div>

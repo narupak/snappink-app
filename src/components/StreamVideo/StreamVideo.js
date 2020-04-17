@@ -58,6 +58,8 @@ export class StreamVideo extends Component {
   }
 
   componentDidMount() {
+    let $ = this.props;
+    console.log("channel:" + $.channel);
     // add listener to control btn group
     let canvas = document.querySelector('#ag-canvas');
     let btnGroup = document.querySelector('.ag-btn-group');
@@ -384,7 +386,7 @@ export class StreamVideo extends Component {
           <TimeRecord>
             <Clock></Clock>
           </TimeRecord>
-          <Link to="/fit">
+          <Link to="/class">
             <ButtonStop style={{ backgroundColor : "#D75A4A" }} >STOP</ButtonStop>
           </Link>
         </div>

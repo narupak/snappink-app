@@ -23,18 +23,18 @@ function App() {
             if (localStorage.getItem("user")) return <ClassList />;
             else return <Redirect from='/class' to='/'/>;
           }} path="/class"/>
-        <Route path="/createClass" render={() => {
-            if (localStorage.getItem("user")) return <CreateClass />;
-            else return <Redirect from='/createClass' to='/'/>;
+        <Route path="/createClass/:id" component={CreateClass} render={() => {
+            if (localStorage.getItem("user")) return <CreateClass/>;
+            else return <Redirect from='/createClass/:id' to='/'/>;
           }}>
         </Route>
-        <Route path="/live/:channel" render={() => {
+        <Route path="/live/:id/:channel" component={Live} render={() => {
             if (localStorage.getItem("user")) return <Live />;
-            else return <Redirect from='/live/:channel' to='/'/>;
+            else return <Redirect from='/live/:id/:channel' to='/'/>;
           }} ></Route>
-        <Route path="/startLive"  render={() => {
+        <Route path="/startLive/:id/:channel"  component={StartLive} render={() => {
             if (localStorage.getItem("user")) return <StartLive />;
-            else return <Redirect from='/startLive' to='/'/>;
+            else return <Redirect from='/startLive/:id/:channel' to='/'/>;
           }} >
         </Route>
       </Switch>

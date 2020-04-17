@@ -11,20 +11,6 @@ export class ClassInformation extends Component {
         expireIn: 0,
         price: 0,
         time: 0,
-      },
-      errors: {
-        className: 'Please Enter Class Name',
-        trainerName: 'Please Enter Trainer Name',
-        expireIn: 'Please Enter ExpireIn',
-        price: 'Please Enter Price',
-        time: 'Please Enter Time',
-      },
-      validate : {
-        inValidClassName: true,
-        inValidTrainerName: true,
-        inValidExpire: true,
-        inValidPrice: true,
-        inValidTime: true
       }
     };
     this.handleChangeClassName = this.handleChangeClassName.bind(this);
@@ -33,26 +19,6 @@ export class ClassInformation extends Component {
     this.handleChangeExpire = this.handleChangeExpire.bind(this);
     this.handleChangePrice = this.handleChangePrice.bind(this);
   }
-
-  componentWillUpdate() {
-    const { input , validate } = this.state;
-    if (input.className) {
-      validate.inValidClassName = false;
-    }
-    if (input.trainerName) {
-      validate.inValidTrainerName = false;
-    }
-    if (input.expireIn) {
-      validate.inValidExpire = false;
-    }
-    if (input.price) {
-      validate.inValidPrice = false;
-    }
-    if (input.time) {
-      validate.inValidTime = false;
-    }
-  }
-
   // async componentWillMount(){
   //   this.setState({ timeNum : await this.props.classInform.time })
   //   console.log(await this.state.timeNum);
@@ -93,32 +59,16 @@ export class ClassInformation extends Component {
   //   },
   // };
   render() {
-    const classInform = this.props.classInform;
+    const { classInform , validate } = this.props;
+    console.log(validate);
     const {
-      input,
-      errors,
-      validate
+      input
     } = this.state;
     input.className = classInform.className;
     input.trainerName = classInform.trainerName;
     input.expireIn = classInform.expireWithIn;
     input.price = classInform.price;
     input.time = classInform.time;
-    if (input.className) {
-      validate.inValidClassName = false;
-    }
-    if (input.trainerName) {
-      validate.inValidTrainerName = false;
-    }
-    if (input.expireIn) {
-      validate.inValidExpire = false;
-    }
-    if (input.price) {
-      validate.inValidPrice = false;
-    }
-    if (input.time) {
-      validate.inValidTime = false;
-    }
     return (
       <Panel>
         <HeaderPanel>
@@ -136,11 +86,11 @@ export class ClassInformation extends Component {
                   placeholder=''
                   onChange={this.handleChangeClassName}
                   defaultValue={input.className}
-                  isInvalid={validate.inValidClassName}
+                  // isInvalid={validate.className}
                 />
-                <Form.Control.Feedback type='invalid'>
+                {/* <Form.Control.Feedback type='invalid'>
                   {errors.className}
-                </Form.Control.Feedback>
+                </Form.Control.Feedback> */}
               </Col>
             </Row>
           </Form.Group>
@@ -155,11 +105,11 @@ export class ClassInformation extends Component {
                 onChange={this.handleChangeTrainerName}
                 defaultValue={input.trainerName}
                 required
-                isInvalid={validate.inValidTrainerName}
+                // isInvalid={validate.trainerName}
               />
-              <Form.Control.Feedback type='invalid'>
+              {/* <Form.Control.Feedback type='invalid'>
                 {errors.trainerName}
-              </Form.Control.Feedback>
+              </Form.Control.Feedback> */}
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId={input.expireWithIn}>
@@ -173,11 +123,11 @@ export class ClassInformation extends Component {
                 onChange={this.handleChangeExpire}
                 value={input.expireIn}
                 required
-                isInvalid={validate.inValidExpire}
+                // isInvalid={validate.expireWithIn}
               />
-              <Form.Control.Feedback type='invalid'>
+              {/* <Form.Control.Feedback type='invalid'>
                 {errors.expireIn}
-              </Form.Control.Feedback>
+              </Form.Control.Feedback> */}
             </Col>
             <Form.Label style={{ marginLeft: '20px' }}>
               <Row> Days</Row>
@@ -195,11 +145,11 @@ export class ClassInformation extends Component {
                 onChange={this.handleChangePrice}
                 value={input.price}
                 required
-                isInvalid={validate.inValidPrice}
+                // isInvalid={validate.price}
               />
-              <Form.Control.Feedback type='invalid'>
+              {/* <Form.Control.Feedback type='invalid'>
                 {errors.price}
-              </Form.Control.Feedback>
+              </Form.Control.Feedback> */}
             </Col>
             <Form.Label> / </Form.Label>
             <Col lg={2}>
@@ -209,11 +159,11 @@ export class ClassInformation extends Component {
                 onChange={this.handleChangeTime}
                 value={input.time}
                 required
-                isInvalid={validate.inValidTime}
+                // isInvalid={validate.time}
               />
-              <Form.Control.Feedback type='invalid'>
-                {errors.price}
-              </Form.Control.Feedback>
+              {/* <Form.Control.Feedback type='invalid'>
+                {errors.time}
+              </Form.Control.Feedback> */}
             </Col>
           </Form.Group>
         </BodyPanel>

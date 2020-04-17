@@ -1,11 +1,11 @@
 export const CONSTANTS = {
     day: [
-        { value: 'Mon', label: 'Monday' },
-        { value: 'Tue', label: 'Tuesday' },
-        { value: 'Wed', label: 'Wednesday' },
-        { value: 'Thu', label: 'Thursday' },
-        { value: 'Fri', label: 'Friday' },
-        { value: 'Sat', label: 'Saturday' },
-        { value: 'Sun', label: 'Sunday' }
+        { value: 0, label: 'Sunday' },
+        { value: 1, label: 'Monday' },
+        { value: 2, label: 'Tuesday' },
+        { value: 3, label: 'Wednesday' },
+        { value: 4, label: 'Thursday' },
+        { value: 5, label: 'Friday' },
+        { value: 6, label: 'Saturday' },
     ]
 }

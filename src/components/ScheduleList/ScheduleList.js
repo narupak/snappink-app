@@ -2,18 +2,11 @@ import React, { Component } from 'react';
 import { SelectAutoSearch } from '../SelectAutoSearch';
 import { DatePickerInput } from '../DatePickerInput';
 import { CONSTANTS } from '../../helpers';
-import { Form, Row, Col} from 'react-bootstrap';
-
+import { Form, Row, Col } from 'react-bootstrap';
 export class ScheduleList extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      startDate : new Date()
-    }
-  }
   render() {
-    const { e, i, onChangeSelectInList, onChangeDateInList } = this.props;
-    const { startDate } = this.state;
+    const { e, i, onChangeSelectInList, onChangeStartDateInList , onChangeEndDateInList } = this.props;
+    console.log(e);
     return (
       <Form.Group as={Row}>
         <Form.Label column lg={2} style={{ textAlign: 'right' }}>
@@ -39,12 +32,10 @@ export class ScheduleList extends Component {
           <DatePickerInput
             dateFormat='h:mm aa'
             placeholderText='Choose Time'
-            selected={startDate}
-            onChange={(date) =>
-              {
-              onChangeDateInList(date, 'openDate', 'hourList', i)
-              }
-            }
+            selected={e.openDate}
+            onChange={(date) => {
+              onChangeStartDateInList(date, 'openDate', 'hourList', i);
+            }}
             showTimeSelect
             showTimeSelectOnly
             timeIntervals={30}
@@ -60,7 +51,7 @@ export class ScheduleList extends Component {
             placeholderText='Choose Time'
             selected={e.closeDate}
             onChange={(date) =>
-              onChangeDateInList(date, 'closeDate', 'hourList', i)
+              onChangeEndDateInList(date, 'closeDate', 'hourList', i)
             }
             showTimeSelect
             showTimeSelectOnly
