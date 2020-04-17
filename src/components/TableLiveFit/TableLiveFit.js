@@ -15,6 +15,7 @@ import {
   Row,
   Col,
   Form,
+  Modal,
 } from "react-bootstrap";
 
 const customStyles = {
@@ -103,24 +104,7 @@ const columns = [
     name: "OPERATION",
     center: true,
     width: "12%",
-    cell: (row) => {
-      return (
-        row.liveStatus === "Soon" && (
-          <div className="text-center">
-            <Link to={`/createClass/${row.classId}`}>
-              <button type="button" className="btn btn btn-link btn-sm">
-                <Pencil style={{ color: "rgb(30, 48, 100)" }} />
-              </button>
-            </Link>
-            <button onClick={()=>{
-          
-            }} type="button" className="btn btn btn-link btn-sm ml-4">
-              <TrashFill style={{ color: "rgb(30, 48, 100)" }} />
-            </button>
-          </div>
-        )
-      );
-    },
+    selector: "btn",
   },
 ];
 
@@ -144,7 +128,8 @@ export class Table extends Component {
       totalPage: 0,
       sort: "",
       url: "https://api-staging.snappink.com/api/gym_class/v1/filter?",
-      chk: false
+      modal: false,
+      delId: "",
     };
   }
 
@@ -181,7 +166,6 @@ export class Table extends Component {
         sort: sort,
       },
       () => {
-        console.log(this.state.sort);
         this.handleTable();
       }
     );
@@ -223,7 +207,7 @@ export class Table extends Component {
     try {
       const response = await axios.get(url);
       if (response.status === 200) {
-        console.log(response);
+        // console.log(response);
         const res = response.data.result.items.map((val, index) => {
           return {
             id: val.id,
@@ -236,7 +220,23 @@ export class Table extends Component {
             liveOpenTime: val.live_open_time,
             liveCloseTime: val.live_close_time,
             liveDate: val.live_day_name,
-            classId : val._id,
+            classId: val._id,
+            btn: val.live_status === "Soon" && (
+              <div className="text-center">
+                <Link to={`/createClass/${val._id}`}>
+                  <button type="button" className="btn btn btn-link btn-sm">
+                    <Pencil style={{ color: "rgb(30, 48, 100)" }} />
+                  </button>
+                </Link>
+                <button
+                  onClick={() => this.modalDelClass(val._id)}
+                  type="button"
+                  className="btn btn btn-link btn-sm ml-4"
+                >
+                  <TrashFill style={{ color: "rgb(30, 48, 100)" }} />
+                </button>
+              </div>
+            ),
           };
         });
         this.setState({ allData: res });
@@ -247,8 +247,42 @@ export class Table extends Component {
     }
   };
 
-  deleteClass = (id) => {
-    console.log(id);
+  modalDelClass = (id) => {
+    this.setState({
+      modal: true,
+    });
+    this.setState({
+      delId: id,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ modal: false });
+  };
+
+  deleteApi = async () => {
+    let url =
+      "https://api-staging.snappink.com/api/gym_class/v1/" + this.state.delId;
+    let token = localStorage.getItem("user");
+    token = JSON.parse(token).token;
+    axios.delete(url, {
+      headers: {
+        token: token,
+      },
+    });
+    this.handleTable();
+  };
+
+  hadleDelClass = () => {
+    this.setState(
+      {
+        modal: false,
+      },
+      () => {
+        this.deleteApi();
+        this.handleTable();
+      }
+    );
   };
 
   render() {
@@ -288,10 +322,7 @@ export class Table extends Component {
         </Row>
         <DataTable
           sortIcon={<IconSort />}
-          columns={
-            columns
-            
-          }
+          columns={columns}
           data={this.state.allData}
           theme="solarized"
           customStyles={customStyles}
@@ -300,6 +331,11 @@ export class Table extends Component {
           onSort={this.handleSort}
           sortFunction={(rows, field, direction) => {
             return rows;
+          }}
+          onRowClicked={(row) => {
+            if (row.liveStatus === "Live Now") {
+              window.location.href = "startLive/" + row.classId;
+            }
           }}
           noDataComponent={
             <div
@@ -322,6 +358,31 @@ export class Table extends Component {
             onChange={this.handlePageChange.bind(this)}
           />
         </div>
+        <Modal centered show={this.state.modal} onHide={this.handleClose}>
+          <Modal.Header>
+            <Modal.Title>Confirm delete</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="text-center mt-4">Are you sure want to delete?</div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              className="cancel"
+              onClick={() => {
+                this.setState({ modal: false });
+              }}
+              style={{ width: "110px", backgroundColor: "rgb(50, 66, 113)" }}
+            >
+              Cancel
+            </Button>
+            <Button
+              style={{ width: "110px", backgroundColor: "rgb(245, 152, 164)" }}
+              onClick={this.hadleDelClass}
+            >
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }

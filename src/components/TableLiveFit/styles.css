@@ -56,3 +56,23 @@ select:focus
     -webkit-appearance:none;
     box-shadow: none !important;
 }
+
+.modal-header{
+  background-color: rgb(245, 152, 164);
+}
+
+.modal-title{
+  color: white;
+}
+
+.modal-body{
+  height: 100px;
+}
+
+.modal-footer{
+  background-color: rgb(221, 221, 221);
+}
+
+.cancel:hover {
+  background-color: rgb(50, 66, 113) !important;
+}
