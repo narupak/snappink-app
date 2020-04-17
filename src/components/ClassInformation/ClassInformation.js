@@ -83,7 +83,7 @@ export class ClassInformation extends Component {
                 <Form.Control
                   type='text'
                   placeholder=''
-                  onChange={this.handleChangeClassName}
+                  onKeyUp={this.handleChangeClassName}
                   defaultValue={input.className}
                   // isInvalid={validate.className}
                 />
@@ -101,7 +101,7 @@ export class ClassInformation extends Component {
               <Form.Control
                 type='text'
                 placeholder=''
-                onChange={this.handleChangeTrainerName}
+                onKeyUp={this.handleChangeTrainerName}
                 defaultValue={input.trainerName}
                 required
                 // isInvalid={validate.trainerName}
@@ -119,7 +119,7 @@ export class ClassInformation extends Component {
               <Form.Control
                 type='number'
                 placeholder=''
-                onChange={this.handleChangeExpire}
+                onKeyUp={this.handleChangeExpire}
                 value={input.expireIn}
                 required
                 // isInvalid={validate.expireWithIn}
@@ -141,7 +141,7 @@ export class ClassInformation extends Component {
               <Form.Control
                 type='number'
                 placeholder=''
-                onChange={this.handleChangePrice}
+                onKeyUp={this.handleChangePrice}
                 value={input.price}
                 required
                 // isInvalid={validate.price}
@@ -155,7 +155,7 @@ export class ClassInformation extends Component {
               <Form.Control
                 type='number'
                 placeholder=''
-                onChange={this.handleChangeTime}
+                onKeyUp={this.handleChangeTime}
                 value={input.time}
                 required
                 // isInvalid={validate.time}

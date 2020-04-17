@@ -205,12 +205,13 @@ class CreateClass extends Component {
       },
       handleFormCheck: () => {
         const { input } = this.state;
+        console.log(input)
         if (
-          input.classInform.className !== '' &&
-          input.classInform.trainerName !== '' &&
-          input.classInform.expireWithIn !== 0 &&
-          input.classInform.price !== 0 &&
-          input.classInform.time !== 0
+          input.classInform.className &&
+          input.classInform.trainerName &&
+          input.classInform.expireWithIn &&
+          input.classInform.price &&
+          input.classInform.time
         ) {
           input.id === 'create'
             ? this.func.api.callCreateClass()
@@ -220,7 +221,8 @@ class CreateClass extends Component {
         }
       },
       handleFormCheckBox: () => {
-        this.setState({ isRepeateWeekly: !this.state.isRepeateWeekly });
+        this.state.input.isRepeateWeekly = !this.state.input.isRepeateWeekly;
+        console.log(this.state.input.isRepeateWeekly)
       },
     },
 
@@ -290,7 +292,7 @@ class CreateClass extends Component {
         const gymClassService = GymClassService({ isShowToastSuccess: true });
         const res = await gymClassService.updateClass(formData, input.id);
         if (res) {
-          window.location.href = 'class';
+          window.location.href = '/class';
         }
       },
     },
@@ -361,7 +363,7 @@ class CreateClass extends Component {
                       }
                       id='isRemember'
                       onChange={this.func.event.handleFormCheckBox}
-                      checked={input.isRemember}
+                      checked={input.isRepeateWeekly}
                     />
                   </Col>
                 </Row>
@@ -376,7 +378,7 @@ class CreateClass extends Component {
                 </ButtonAddMore>
               </BodyPanel>
               <Footer>
-                <Link to='/fit'>
+                <Link to='/class'>
                   <ButtonCancel
                     type='button'
                     style={{ backgroundColor: '#bbbbbb' }}
