@@ -338,7 +338,7 @@ export class Table extends Component {
           }}
           onRowClicked={(row) => {
             if (row.liveStatus === "Live Now") {
-              window.location.href = "startLive/" + row.classId;
+              window.location.href = "startLive/" + row.classId + "/" + row.className;
             }
           }}
           noDataComponent={
