@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavDropdown } from "react-bootstrap";
 import { LabelStyle, Profile } from "./styled";
+import noImg from "./../../../src/assets/image/noImg.png";
 
 export class UserProfile extends Component {
   logout() {
@@ -10,15 +11,28 @@ export class UserProfile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { img: "", name: "" };
+    this.state = { img: noImg, name: "" };
   }
+
+  componentDidMount = () => {
+    let data = localStorage.getItem("user");
+    data = JSON.parse(data);
+    this.setState({
+      name: data.first_name + " " + data.last_name
+    });
+    if (data.profile_thumbnail) {
+      this.setState({
+        img: data.profile_thumbnail
+      });
+    }
+  };
 
   render() {
     return (
       <Profile>
         <div>
           <div>
-            <LabelStyle className="mt-2">John Doe</LabelStyle>
+    <LabelStyle className="mt-2">{this.state.name}</LabelStyle>
           </div>
         </div>
         <div>
@@ -27,8 +41,8 @@ export class UserProfile extends Component {
               className="ml-2"
               style={{ borderRadius: "50%" }}
               height="36px"
-              src="https://upload.wikimedia.org/wikipedia/en/6/63/IMG_%28business%29.svg"
-              alt="https://upload.wikimedia.org/wikipedia/en/6/63/IMG_%28business%29.svg"
+              src={this.state.img}
+              alt={this.state.img}
               width="36px"
             />
           </div>

@@ -3,8 +3,6 @@ import { HeaderLiveFit } from '../../components';
 import group from '../../assets/image/group.png';
 import { Col } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import * as Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
 import {
   Body,
   LabelStyle,
@@ -39,7 +37,7 @@ class StartLive extends Component {
         <Body>
           <div style={{ width: '100%' }}>
             <div className='row pt-3 pb-3 pl-5 pr-5 ml-2 mr-2'>
-              <img src={group} alt='Logo' width='50px' />
+              <img src={group} alt='Logo' height='50px' width='50px' />
               <Col>
                 <LabelStyle>Class</LabelStyle>
                 <Breadcrumb>
