@@ -1,48 +1,50 @@
-import React, { Component } from "react";
-import snappink from "../../assets/image/snappink.png";
-import LiveFit from "../../assets/image/liveFit.png";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import snappink from '../../assets/image/snappink.png';
+import LiveFit from '../../assets/image/liveFit.png';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-import ReactNotification from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import { store } from "react-notifications-component";
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
+import { Image, Field } from '../../components';
+import { ICONS } from '../../themes';
 
 export class FormLogin extends Component {
   constructor() {
     super();
     this.state = {
       formLogin: {
-        email: "",
-        password: "",
+        email: '',
+        password: ''
       },
     };
   }
 
   static contextTypes = {
-    router: PropTypes.object
-  }
+    router: PropTypes.object,
+  };
 
   handleCheckboxChange = (event) =>
     this.setState({ checked: event.target.checked });
 
   handleSubmit = () => {
-    const url = "https://api-staging.snappink.com/api/authTrainer/v1";
+    const url = 'https://api-staging.snappink.com/api/authTrainer/v1';
     const data = {
       email: this.state.formLogin.email,
       password: this.state.formLogin.password,
     };
     fetch(url, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => res.json())
-      .catch((error) => console.error("Error:", error))
+      .catch((error) => console.error('Error:', error))
       .then((response) => {
         if (response.result) {
           this.hadleLoginSuccess(response.message);
-          localStorage.setItem("user", JSON.stringify(response.result));
+          localStorage.setItem('user', JSON.stringify(response.result));
           setTimeout(() => {
             this.props.history.push('/class');
           }, 500);
@@ -60,29 +62,29 @@ export class FormLogin extends Component {
 
   checkForm = () => {
     if (
-      this.state.formLogin.email === "" &&
-      this.state.formLogin.password === ""
+      this.state.formLogin.email === '' &&
+      this.state.formLogin.password === ''
     ) {
-      this.formValidMessage("Please ,Enter your email and password.");
+      this.formValidMessage('Please ,Enter your email and password.');
     } else {
       this.state.formLogin.email &&
-        this.formValidMessage("Please ,Enter your password.");
+        this.formValidMessage('Please ,Enter your password.');
       this.state.formLogin.password &&
-        this.formValidMessage("Please ,Enter your email.");
+        this.formValidMessage('Please ,Enter your email.');
     }
   };
 
   formValidMessage = (message) => {
     store.addNotification({
-      title: <div style={{ textAlign: "left", color: "white" }}>Warning !</div>,
+      title: <div style={{ textAlign: 'left', color: 'white' }}>Warning !</div>,
       message: (
-        <div style={{ textAlign: "left", color: "white" }}>{message}</div>
+        <div style={{ textAlign: 'left', color: 'white' }}>{message}</div>
       ),
-      type: "warning",
-      container: "top-right",
-      insert: "top",
-      animationIn: ["animated", "fadeIn"],
-      animationOut: ["animated", "fadeOut"],
+      type: 'warning',
+      container: 'top-right',
+      insert: 'top',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
       dismiss: {
         duration: 2000,
       },
@@ -91,15 +93,15 @@ export class FormLogin extends Component {
 
   hadleLoginSuccess = (message) => {
     store.addNotification({
-      title: <div style={{ textAlign: "left", color: "white" }}>Success</div>,
+      title: <div style={{ textAlign: 'left', color: 'white' }}>Success</div>,
       message: (
-        <div style={{ textAlign: "left", color: "white" }}>{message}</div>
+        <div style={{ textAlign: 'left', color: 'white' }}>{message}</div>
       ),
-      type: "success",
-      container: "top-right",
-      insert: "top",
-      animationIn: ["animated", "fadeIn"],
-      animationOut: ["animated", "fadeOut"],
+      type: 'success',
+      container: 'top-right',
+      insert: 'top',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
       dismiss: {
         duration: 2000,
       },
@@ -108,15 +110,15 @@ export class FormLogin extends Component {
 
   hadleLoginFail = (message) => {
     store.addNotification({
-      title: <div style={{ textAlign: "left", color: "white" }}>Fail</div>,
+      title: <div style={{ textAlign: 'left', color: 'white' }}>Fail</div>,
       message: (
-        <div style={{ textAlign: "left", color: "white" }}>{message}</div>
+        <div style={{ textAlign: 'left', color: 'white' }}>{message}</div>
       ),
-      type: "danger",
-      container: "top-right",
-      insert: "top",
-      animationIn: ["animated", "fadeIn"],
-      animationOut: ["animated", "fadeOut"],
+      type: 'danger',
+      container: 'top-right',
+      insert: 'top',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
       dismiss: {
         duration: 2000,
       },
@@ -143,65 +145,76 @@ export class FormLogin extends Component {
 
   render() {
     const formGroupCenter = {
-      justifyContent: "center",
-      marginTop: "20px",
+      justifyContent: 'center',
+      marginTop: '20px',
     };
 
     const formCenter = {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
     };
 
     return (
       <div>
         <ReactNotification />
         <Form style={formCenter}>
-          <Row style={{ display: "block", width: "25%" }}>
+          <Row style={{ display: 'block', width: '25%' }}>
             <Row>
               <Col>
-                <img src={snappink} alt="Logo" />
+                <img src={snappink} alt='Logo' />
               </Col>
             </Row>
-            <Row style={{ marginTop: "20px" }}>
+            <Row style={{ marginTop: '20px' }}>
               <Col>
-                <img src={LiveFit} alt="Logo" />
+                <img src={LiveFit} alt='Logo' />
               </Col>
             </Row>
-            <Form.Group controlId="mail" style={formGroupCenter}>
+            <Form.Group controlId='mail' style={formGroupCenter}>
               <Col>
                 <Form.Control
-                  type="email"
+                  type='email'
                   onChange={this.handleEmailChange}
-                  placeholder="Email"
+                  placeholder='Email'
                 />
               </Col>
             </Form.Group>
-            <Form.Group controlId="password" style={formGroupCenter}>
+            <Form.Group controlId='password' style={formGroupCenter}>
               <Col>
                 <Form.Control
-                  type="password"
+                  type='password'
                   onChange={this.handlePasswordChange}
-                  placeholder="Password"
+                  placeholder='Password'
                 />
               </Col>
             </Form.Group>
-            <Form.Group controlId="remember" style={{ textAlign: "left" }}>
+            <Form.Group controlId='remember' style={{ textAlign: 'left' }}>
               <Col>
-                <Form.Check type="checkbox" label="Remember me" />
+                <Field
+                  type='checkbox'
+                  checkboxLabel='Remember me'
+                  checkboxCheckedIcon={
+                    <Image
+                      className='icon-checked'
+                      alt='checked'
+                      src={ICONS['checked-ico.svg']}
+                    />
+                  }
+                  id='isRemember'
+                />
               </Col>
             </Form.Group>
             <Col>
               <Button
-                type="button"
+                type='button'
                 onClick={this.hadleFormCheck}
                 style={{
-                  width: "100%",
-                  backgroundColor: "#F598A4",
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                  border: "none",
+                  width: '100%',
+                  backgroundColor: '#F598A4',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  border: 'none',
                 }}
               >
                 Log in
@@ -213,4 +226,3 @@ export class FormLogin extends Component {
     );
   }
 }
-

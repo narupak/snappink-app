@@ -6,7 +6,6 @@ import { Form, Row, Col } from 'react-bootstrap';
 export class ScheduleList extends Component {
   render() {
     const { e, i, onChangeSelectInList, onChangeStartDateInList , onChangeEndDateInList } = this.props;
-    console.log(e);
     return (
       <Form.Group as={Row}>
         <Form.Label column lg={2} style={{ textAlign: 'right' }}>

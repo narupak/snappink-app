@@ -59,8 +59,7 @@ export class ClassInformation extends Component {
   //   },
   // };
   render() {
-    const { classInform , validate } = this.props;
-    console.log(validate);
+    const { classInform } = this.props;
     const {
       input
     } = this.state;

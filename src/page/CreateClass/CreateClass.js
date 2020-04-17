@@ -3,6 +3,8 @@ import {
   ClassInformation,
   HeaderLiveFit,
   ScheduleList,
+  Image,
+  Field
 } from '../../components';
 import group from '../../assets/image/group.png';
 import { Form, Col, Row } from 'react-bootstrap';
@@ -27,6 +29,9 @@ import {
 import './createClass.css';
 import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
+import {
+  ICONS
+} from '../../themes';
 
 var moment = require('moment');
 const dayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -69,24 +74,22 @@ class CreateClass extends Component {
           input[list][index][id] &&
           input[list][index][id].value < new Date().getDay()
         ) {
-          console.log('more');
           const futureDay = moment().add(1, 'week');
           input[list][index]['openDate'] = new Date(
             futureDay.subtract(
               new Date().getDay() - input[list][index][id].value,
               'days'
-            )
+            ).format('L')
           );
         } else if (
           input[list][index][id] &&
           input[list][index][id].value > new Date().getDay()
         ) {
-          console.log('less');
           input[list][index]['openDate'] = new Date(
             moment().add(
               input[list][index][id].value - new Date().getDay(),
               'days'
-            )
+            ).format('L')
           );
         } else {
           input[list][index]['openDate'] = new Date();
@@ -100,7 +103,7 @@ class CreateClass extends Component {
             futureDay.subtract(
               new Date().getDay() - input[list][index][id].value,
               'days'
-            )
+            ).format('L')
           );
         } else if (
           input[list][index][id] &&
@@ -110,7 +113,7 @@ class CreateClass extends Component {
             moment().add(
               input[list][index][id].value - new Date().getDay(),
               'days'
-            )
+            ).format('L')
           );
         } else {
           input[list][index]['closeDate'] = new Date();
@@ -346,10 +349,19 @@ class CreateClass extends Component {
                 <Row>
                   <Col lg={2}></Col>
                   <Col>
-                    <Form.Check
+                    <Field
                       type='checkbox'
-                      label='Repeat weekly'
+                      checkboxLabel='Repeat Weekly'
+                      checkboxCheckedIcon={
+                        <Image
+                          className='icon-checked'
+                          alt='checked'
+                          src={ICONS['checked-ico.svg']}
+                        />
+                      }
+                      id='isRemember'
                       onChange={this.func.event.handleFormCheckBox}
+                      checked={input.isRemember}
                     />
                   </Col>
                 </Row>
