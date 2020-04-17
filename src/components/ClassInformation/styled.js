@@ -4,6 +4,7 @@ export const Panel = styled.div`
   width: 100%;
   height: 50vh;
   padding: 50px;
+  margin-bottom : 50px;
 `;
 export const HeaderPanel = styled.div`
   padding-left: 10px;

@@ -48,7 +48,7 @@ export const Content = styled.div`
 
 export const Panel = styled.div`
   width: 100%;
-  height: 50vh;
+  height: 100% !important;
   padding: 50px;
 `;
 export const HeaderPanel = styled.div`
@@ -62,7 +62,6 @@ export const HeaderPanel = styled.div`
 
 export const BodyPanel = styled.div`
   width: 100%;
-  hight: 50%;
   padding-left: 50px;
   padding-top: 20px;
 `;

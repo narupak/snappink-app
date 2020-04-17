@@ -5,8 +5,15 @@ import { CONSTANTS } from '../../helpers';
 import { Form, Row, Col} from 'react-bootstrap';
 
 export class ScheduleList extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      startDate : new Date()
+    }
+  }
   render() {
     const { e, i, onChangeSelectInList, onChangeDateInList } = this.props;
+    const { startDate } = this.state;
     return (
       <Form.Group as={Row}>
         <Form.Label column lg={2} style={{ textAlign: 'right' }}>
@@ -32,9 +39,11 @@ export class ScheduleList extends Component {
           <DatePickerInput
             dateFormat='h:mm aa'
             placeholderText='Choose Time'
-            selected={e.openDate}
+            selected={startDate}
             onChange={(date) =>
+              {
               onChangeDateInList(date, 'openDate', 'hourList', i)
+              }
             }
             showTimeSelect
             showTimeSelectOnly

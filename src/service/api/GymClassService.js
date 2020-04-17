@@ -10,6 +10,11 @@ export const GymClassService = (configService = {}) => {
         url: `${apiPath}`,
         params: params,
       })
+    },
+    getById: (id) => {
+      return service.get({
+        url: `${apiPath}/${id}`
+      })
     }
   }
 }

@@ -44,7 +44,7 @@ export class FormLogin extends Component {
           this.hadleLoginSuccess(response.message);
           localStorage.setItem("user", JSON.stringify(response.result));
           setTimeout(() => {
-            this.props.history.push('/fit');
+            this.props.history.push('/class');
           }, 500);
         } else {
           this.hadleLoginFail(response.message);

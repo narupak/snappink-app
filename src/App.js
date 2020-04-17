@@ -21,14 +21,21 @@ function App() {
         <Route exact={true}
           render={() => {
             if (localStorage.getItem("user")) return <ClassList />;
-            else return <Redirect from='/fit' to='/'/>;
-          }} path="/fit"/>
-        <Route path="/createClass">
-          <CreateClass />
+            else return <Redirect from='/class' to='/'/>;
+          }} path="/class"/>
+        <Route path="/createClass" render={() => {
+            if (localStorage.getItem("user")) return <CreateClass />;
+            else return <Redirect from='/createClass' to='/'/>;
+          }}>
         </Route>
-        <Route path="/live/:channel" component={Live}></Route>
-        <Route path="/startLive">
-          <StartLive />
+        <Route path="/live/:channel" render={() => {
+            if (localStorage.getItem("user")) return <Live />;
+            else return <Redirect from='/live/:channel' to='/'/>;
+          }} ></Route>
+        <Route path="/startLive"  render={() => {
+            if (localStorage.getItem("user")) return <StartLive />;
+            else return <Redirect from='/startLive' to='/'/>;
+          }} >
         </Route>
       </Switch>
     </Router>
