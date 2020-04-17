@@ -265,12 +265,15 @@ export class Table extends Component {
       "https://api-staging.snappink.com/api/gym_class/v1/" + this.state.delId;
     let token = localStorage.getItem("user");
     token = JSON.parse(token).token;
-    axios.delete(url, {
-      headers: {
-        token: token,
-      },
-    });
-    this.handleTable();
+    axios
+      .delete(url, {
+        headers: {
+          token: token,
+        },
+      })
+      .then(function () {
+        this.handleTable();
+      });
   };
 
   hadleDelClass = () => {
@@ -280,7 +283,6 @@ export class Table extends Component {
       },
       () => {
         this.deleteApi();
-        this.handleTable();
       }
     );
   };
