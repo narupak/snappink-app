@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { StreamVideo } from '../../components';
-import "./meeting.css";
+import './meeting.css';
 class Live extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoProfile : '1440p_1',
-      channel : this.props.match.params.channel,
-      transcode : 'interop',
-      attendeeMode : 'video',
-      baseMode : 'al',
-      appId : 'b0eee4d29b954766add16ff1f0dc8ef0',
-      uid : undefined
-    }
-  }
-
-  componentDidMount() {
-    this.setState({channel : this.props.match.params.channel });
+      videoProfile: '720p_2',
+      channel: this.props.match.params.channel,
+      transcode: 'interop',
+      attendeeMode: 'video',
+      baseMode: 'al',
+      appId: 'b0eee4d29b954766add16ff1f0dc8ef0',
+      uid: undefined,
+      id: this.props.match.params.id,
+    };
   }
 
   render() {
@@ -26,12 +23,13 @@ class Live extends Component {
           <div className='ag-container'>
             <StreamVideo
               videoProfile={this.state.videoProfile}
-              channel={this.state.channel}
               transcode={this.state.transcode}
               attendeeMode={this.state.attendeeMode}
               baseMode={this.state.baseMode}
               appId={this.state.appId}
               uid={this.state.uid}
+              id={this.state.id}
+              channel={this.state.channel}
             />
           </div>
         </div>

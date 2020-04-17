@@ -31,7 +31,7 @@ class ClassList extends Component {
                 </ol>
               </Col>
               <div className='pt-3'>
-                <Link to='/createClass'>
+                <Link to='/createClass/create'>
                   <ButtonCreateClass />
                 </Link>
               </div>

@@ -11,6 +11,12 @@ export const GymClassService = (configService = {}) => {
         params: params,
       })
     },
+    updateClass: (params , id) => {
+      return service.put({
+        url: `${apiPath}/${id}`,
+        params: params,
+      })
+    },
     getById: (id) => {
       return service.get({
         url: `${apiPath}/${id}`

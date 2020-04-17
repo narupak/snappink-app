@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { ClassInformation,HeaderLiveFit,ScheduleList } from '../../components';
+import {
+  ClassInformation,
+  HeaderLiveFit,
+  ScheduleList,
+} from '../../components';
 import group from '../../assets/image/group.png';
 import { Form, Col, Row } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
@@ -21,7 +25,11 @@ import {
   ButtonAddMore,
 } from './styled';
 import './createClass.css';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
 
+var moment = require('moment');
+const dayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 class CreateClass extends Component {
   constructor(props) {
     super(props);
@@ -42,13 +50,13 @@ class CreateClass extends Component {
           },
         ],
         isRepeateWeekly: false,
+        id: this.props.match.params.id,
       },
-      // id : "5e953edfc841333b68830402"
     };
   }
 
-  componentWillMount(){
-    this.state.id && this.func.api.getById()
+  componentDidMount() {
+    this.props.match.params.id !== 'create' && this.func.api.getById();
   }
 
   func = {
@@ -56,9 +64,65 @@ class CreateClass extends Component {
       onChangeSelectInList: (value, id, list, index) => {
         const { input } = this.state;
         input[list][index][id] = value;
+        console.log(value);
+        if (
+          input[list][index][id] &&
+          input[list][index][id].value < new Date().getDay()
+        ) {
+          console.log('more');
+          const futureDay = moment().add(1, 'week');
+          input[list][index]['openDate'] = new Date(
+            futureDay.subtract(
+              new Date().getDay() - input[list][index][id].value,
+              'days'
+            )
+          );
+        } else if (
+          input[list][index][id] &&
+          input[list][index][id].value > new Date().getDay()
+        ) {
+          console.log('less');
+          input[list][index]['openDate'] = new Date(
+            moment().add(
+              input[list][index][id].value - new Date().getDay(),
+              'days'
+            )
+          );
+        } else {
+          input[list][index]['openDate'] = new Date();
+        }
+        if (
+          input[list][index][id] &&
+          input[list][index][id].value < new Date().getDay()
+        ) {
+          const futureDay = moment().add(1, 'week');
+          input[list][index]['closeDate'] = new Date(
+            futureDay.subtract(
+              new Date().getDay() - input[list][index][id].value,
+              'days'
+            )
+          );
+        } else if (
+          input[list][index][id] &&
+          input[list][index][id].value > new Date().getDay()
+        ) {
+          input[list][index]['closeDate'] = new Date(
+            moment().add(
+              input[list][index][id].value - new Date().getDay(),
+              'days'
+            )
+          );
+        } else {
+          input[list][index]['closeDate'] = new Date();
+        }
         this.setState({ input });
       },
-      onChangeDateInList: (value, id, list, index) => {
+      onChangeStartDateInList: (value, id, list, index) => {
+        const { input } = this.state;
+        input[list][index][id] = value;
+        this.setState({ input });
+      },
+      onChangeEndDateInList: (value, id, list, index) => {
         const { input } = this.state;
         input[list][index][id] = value;
         this.setState({ input });
@@ -80,13 +144,80 @@ class CreateClass extends Component {
         input.hourList.forEach((item) => {
           if (item.day && item.openDate && item.closeDate) {
             result.push({
-              day_name: item.day.value,
+              day_name: dayList[item.day.value],
               open_time: item.openDate,
               close_time: item.closeDate,
             });
           }
         });
         return result;
+      },
+      checkForm: () => {
+        const { input } = this.state;
+        let warning = '';
+        if (!input.classInform.className) {
+          warning += 'Please Enter Class Name \n';
+        }
+        if (!input.classInform.trainerName) {
+          warning += 'Please Enter Trainer Name \n';
+        }
+        if (!input.classInform.expireWithIn) {
+          warning += 'Please Enter Expire \n';
+        }
+        if (!input.classInform.price) {
+          warning += 'Please Enter Price \n';
+        }
+        if (!input.classInform.time) {
+          warning += 'Please Enter Time \n';
+        }
+        input.hourList.map((rs) => {
+          if (
+            rs.day === null ||
+            rs.openDate === null ||
+            rs.closeDate === null
+          ) {
+            warning += 'Please Choose day \n';
+          }
+          return warning;
+        });
+        this.func.event.formValidMessage(warning);
+      },
+      formValidMessage: (message) => {
+        store.addNotification({
+          title: (
+            <div style={{ textAlign: 'left', color: 'white' }}>Warning !</div>
+          ),
+          message: (
+            <div style={{ textAlign: 'left', color: 'white' }}>{message}</div>
+          ),
+          type: 'warning',
+          container: 'top-right',
+          insert: 'top',
+          animationIn: ['animated', 'fadeIn'],
+          animationOut: ['animated', 'fadeOut'],
+          dismiss: {
+            duration: 2000,
+          },
+        });
+      },
+      handleFormCheck: () => {
+        const { input } = this.state;
+        if (
+          input.classInform.className !== '' &&
+          input.classInform.trainerName !== '' &&
+          input.classInform.expireWithIn !== 0 &&
+          input.classInform.price !== 0 &&
+          input.classInform.time !== 0
+        ) {
+          input.id === 'create'
+            ? this.func.api.callCreateClass()
+            : this.func.api.updateClass();
+        } else {
+          this.func.event.checkForm();
+        }
+      },
+      handleFormCheckBox: () => {
+        this.setState({ isRepeateWeekly: !this.state.isRepeateWeekly });
       },
     },
 
@@ -97,9 +228,9 @@ class CreateClass extends Component {
         const request = {
           name: input.classInform.className,
           trainer_name: input.classInform.trainerName,
-          exp_day_amt: input.classInform.expireWithIn.toString(),
-          snappink_price: input.classInform.price,
-          course_times: input.classInform.time,
+          exp_day_amt: +input.classInform.expireWithIn,
+          snappink_price: +input.classInform.price,
+          course_times: +input.classInform.time,
           class_hours: this.func.event.getScheduleList(),
           is_repeat_weekly: input.isRepeateWeekly,
         };
@@ -108,93 +239,62 @@ class CreateClass extends Component {
         const gymClassService = GymClassService({ isShowToastSuccess: true });
         const res = await gymClassService.createClass(formData);
         if (res) {
-          console.log(res);
-          // setLoadingRedux(false)
-          // redirect(ROUTE_PATH.PARTNER.LINK)
+          window.location.href = '/class';
         }
       },
-      getById : async () => {
-        const { id,input } = this.state;
+      getById: async () => {
+        const { input } = this.state;
         const gymClassService = GymClassService({ isShowToastSuccess: true });
-        const res = await gymClassService.getById(id);
-        if(res){
-          let {
-            input,
-          } = this.state
-          let hourList = []
+        const res = await gymClassService.getById(input.id);
+        if (res) {
+          let { input } = this.state;
+          let hourList = [];
           input.classInform.className = res.name;
           input.classInform.trainerName = res.trainer_name;
           input.classInform.expireWithIn = res.exp_day_amt;
           input.classInform.price = res.snappink_price;
           input.classInform.time = res.course_times;
-          res.class_hours.forEach(item=>{
+          res.class_hours.forEach((item) => {
             hourList.push({
-              day: CONSTANTS.day.find(day => day.value === item.day_name),
-              openDate:  new Date(item.open_time),
+              day: CONSTANTS.day.find(
+                (day) => dayList[day.value] === item.day_name
+              ),
+              openDate: new Date(item.open_time),
               closeDate: new Date(item.close_time),
-            })
-          })
+            });
+          });
           input.hourList = hourList;
           input.isRepeateWeekly = res.is_repeat_weekly;
         }
 
         this.setState({ input });
-      }
+      },
+      updateClass: async () => {
+        const { input } = this.state;
+        console.log(input);
+        const request = {
+          _id: input.id,
+          name: input.classInform.className,
+          trainer_name: input.classInform.trainerName,
+          exp_day_amt: +input.classInform.expireWithIn,
+          snappink_price: +input.classInform.price,
+          course_times: +input.classInform.time,
+          class_hours: this.func.event.getScheduleList(),
+          is_repeat_weekly: input.isRepeateWeekly,
+        };
+        const formData = new FormData();
+        formData.append('request', JSON.stringify(request));
+        const gymClassService = GymClassService({ isShowToastSuccess: true });
+        const res = await gymClassService.updateClass(formData, input.id);
+        if (res) {
+          window.location.href = 'class';
+        }
+      },
     },
-
-    // validate: {
-    //   createPartner: () => {
-    //     const { input, upload } = this.state;
-    //     let result = validateService('createPartner', input);
-
-    //     //!------>>> Special Validate <<<------!//
-    //     if (input.password !== input.confirmPassword) {
-    //       result.validate.confirmPassword = 'Password do not match';
-    //       result.isValid = false;
-    //       console.warn(`confirmPassword is invalid.`);
-    //     }
-    //     //!------>>> Upload Validate <<<------!//
-    //     if (upload.image.profile.validate !== '') {
-    //       // result.isValid = false
-    //       // console.warn(`image profile is invalid.`)
-    //       upload.image.profile.validate = '';
-    //     }
-    //     if (upload.image.cover.validate !== '') {
-    //       // result.isValid = false
-    //       // console.warn(`image cover is invalid.`)
-    //       upload.image.cover.validate = '';
-    //     }
-    //     upload.image.gallery.forEach((gallery, index) => {
-    //       if (gallery.validate !== '') {
-    //         // result.isValid = false
-    //         // console.warn(`image gallery[${index}] is invalid.`)
-    //         gallery.validate = '';
-    //       }
-    //     });
-
-    //     this.setState({ validate: result.validate });
-    //     return result.isValid;
-    //   },
-    // },
-    // getOfficeHours: () => {
-    //   const { input } = this.state;
-    //   let result = [];
-    //   input.hourList.forEach((item) => {
-    //     if (item.day && item.openDate && item.closeDate) {
-    //       result.push({
-    //         day_name: item.day.value,
-    //         open_time: item.openDate,
-    //         close_time: item.closeDate,
-    //       });
-    //     }
-    //   });
-    //   return result;
-    // },
-    // },
   };
 
   render() {
-    const { input } = this.state;
+    const { input, validate } = this.state;
     return (
       <div>
         <HeaderLiveFit />
@@ -221,31 +321,38 @@ class CreateClass extends Component {
           <Content>
             <ClassInformation
               classInform={input.classInform}
+              validate={validate}
             ></ClassInformation>
             <Panel>
               <HeaderPanel>
                 <label style={{ color: 'white' }}>Live Schedule</label>
               </HeaderPanel>
               <BodyPanel>
-                  {input.hourList.map((e, i) => (
-                    <ScheduleList
-                      key={i}
-                      e={e}
-                      i={i}
-                      onChangeSelectInList={
-                        this.func.input.onChangeSelectInList
-                      }
-                      onChangeDateInList={this.func.input.onChangeDateInList}
-                    />
-                  ))}
-                  ;
+                {input.hourList.map((e, i) => (
+                  <ScheduleList
+                    key={i}
+                    e={e}
+                    i={i}
+                    onChangeSelectInList={this.func.input.onChangeSelectInList}
+                    onChangeStartDateInList={
+                      this.func.input.onChangeStartDateInList
+                    }
+                    onChangeEndDateInList={
+                      this.func.input.onChangeEndDateInList
+                    }
+                  />
+                ))}
+                ;
                 <Row>
-                <Col lg={2}></Col>
+                  <Col lg={2}></Col>
                   <Col>
-                    <Form.Check type='checkbox' label='Repeat weekly' />
+                    <Form.Check
+                      type='checkbox'
+                      label='Repeat weekly'
+                      onChange={this.func.event.handleFormCheckBox}
+                    />
                   </Col>
                 </Row>
-
                 <ButtonAddMore
                   style={{ backgroundColor: '#1e3064' }}
                   type='button'
@@ -268,7 +375,7 @@ class CreateClass extends Component {
                 <ButtonConfirm
                   type='button'
                   style={{ backgroundColor: '#1e3064' }}
-                  onClick={this.func.api.callCreateClass}
+                  onClick={this.func.event.handleFormCheck}
                 >
                   Save
                 </ButtonConfirm>

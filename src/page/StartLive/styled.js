@@ -36,6 +36,7 @@ export const LabelHeader = styled.div`
   font-size: 20px;
   font-family: Roboto;
   font-weight: bold;
+  color : white;
 `;
 
 export const ButtonStartLive = styled(Button)`
