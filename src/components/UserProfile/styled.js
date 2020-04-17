@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LabelStyle = styled.div`
-  font-size: 12px;
+  font-size: 16px;
   font-family: Roboto;
   font-weight: bold;
 `;
