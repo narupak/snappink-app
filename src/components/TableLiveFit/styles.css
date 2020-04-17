@@ -43,3 +43,16 @@ div {
 .pagination li.active a {
   color: white;
 }
+
+.rdt_TableHeadRow, .rdt_TableRow{
+  border-radius: 5px;
+}
+
+
+input:focus,
+select:focus
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
