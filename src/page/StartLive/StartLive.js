@@ -12,14 +12,27 @@ import {
   ButtonStartLive,
   ContentLive,
 } from './styled';
+import { store } from 'react-notifications-component';
+import ReactNotification from 'react-notifications-component';
 
 class StartLive extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: this.props.match.params.id,
-      channel: this.props.match.params.channel
+      channel: this.props.match.params.channel,
     };
+  }
+
+  componentWillMount() {
+    let warnning;
+    if (!this.props.match.params.id) {
+      warnning += "Please Send Id";
+    }
+    if(!this.props.match.params.channel){
+      warnning += "Please Send Channel";
+    }
+    this.func.event.formValidMessage(warnning);
   }
 
   func = {
@@ -27,14 +40,33 @@ class StartLive extends Component {
       toLive: () => {
         window.location.href = `/live/${this.state.id}/${this.state.channel}`;
       },
+      formValidMessage: (message) => {
+        store.addNotification({
+          title: (
+            <div style={{ textAlign: 'left', color: 'white' }}>Warning !</div>
+          ),
+          message: (
+            <div style={{ textAlign: 'left', color: 'white' }}>{message}</div>
+          ),
+          type: 'warning',
+          container: 'top-right',
+          insert: 'top',
+          animationIn: ['animated', 'fadeIn'],
+          animationOut: ['animated', 'fadeOut'],
+          dismiss: {
+            duration: 2000,
+          },
+        });
+      },
     },
   };
 
   render() {
     return (
       <div>
-        <HeaderLiveFit></HeaderLiveFit>
+        <HeaderLiveFit/>
         <Body>
+        <ReactNotification />
           <div style={{ width: '100%' }}>
             <div className='row pt-3 pb-3 pl-5 pr-5 ml-2 mr-2'>
               <img src={group} alt='Logo' height='50px' width='50px' />

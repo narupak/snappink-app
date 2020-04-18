@@ -222,14 +222,12 @@ class CreateClass extends Component {
       },
       handleFormCheckBox: () => {
         this.state.input.isRepeateWeekly = !this.state.input.isRepeateWeekly;
-        console.log(this.state.input.isRepeateWeekly)
       },
     },
 
     api: {
       callCreateClass: async () => {
         const { input } = this.state;
-        console.log(input);
         const request = {
           name: input.classInform.className,
           trainer_name: input.classInform.trainerName,
@@ -276,7 +274,6 @@ class CreateClass extends Component {
       },
       updateClass: async () => {
         const { input } = this.state;
-        console.log(input);
         const request = {
           _id: input.id,
           name: input.classInform.className,
