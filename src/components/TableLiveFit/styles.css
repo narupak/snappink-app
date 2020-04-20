@@ -18,7 +18,7 @@ div {
 }
 
 .pagination {
-  display: inline-block;
+  display: flex;
   cursor: pointer;
 }
 
