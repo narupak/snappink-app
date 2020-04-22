@@ -5,9 +5,10 @@ import "./styles.css";
 import { Pencil, TrashFill, Search } from "react-bootstrap-icons";
 import Pagination from "react-js-pagination";
 import axios from "axios";
-import Moment from "react-moment";
 import logoNoData from "./icons/partner-nodata-ico.5048444f.svg";
 import { Link } from "react-router-dom";
+import momentJs from 'moment';
+import Moment from 'react-moment';
 import {
   InputGroup,
   Button,
@@ -80,10 +81,12 @@ const columns = [
     name: "LIVE TIME",
     center: true,
     cell: (row) => {
+      console.log(row.liveOpenTime)
+      let liveOpenTime = momentJs(row.liveOpenTime).format('hh:mm')
+      let liveCloseTime = momentJs(row.liveCloseTime).format('hh:mm')
       return (
         <div>
-          <Moment format="HH:MM">{row.liveOpenTime}</Moment> -{" "}
-          <Moment format="HH:MM">{row.liveCloseTime}</Moment>
+          {liveOpenTime} -{" "}{liveCloseTime}
         </div>
       );
     },
@@ -136,6 +139,7 @@ export class Table extends Component {
   componentDidMount() {
     this.handleTotalPage();
     this.handleTable();
+    // setInterval(this.handleTable, 5000);
   }
 
   handleSearch = (e) => {
