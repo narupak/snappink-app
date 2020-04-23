@@ -35,43 +35,58 @@ const customStyles = {
 const columns = [
   {
     name: "#",
-    selector: "index",
+    // selector: "index",
     center: true,
     width: "5%",
+    cell: (row) =>{
+      return <span style={{fontFamily:"roboto"}}>{row.index}</span>;
+    }
   },
   {
     name: "CLASSNAME",
-    selector: "className",
+    // selector: "className",
     sortable: true,
     width: "17%",
+    cell: (row) =>{
+      return <span style={{fontFamily:"roboto"}}>{row.className}</span>;
+    }
   },
   {
     name: "TRAINER",
-    selector: "trainer",
+    // selector: "trainer",
     width: "17%",
+    cell: (row) =>{
+      return <span style={{fontFamily:"roboto"}}>{row.trainer}</span>;
+    }
   },
   {
     name: <div className="text-center">PRICE (THB)</div>,
-    selector: "price",
+    // selector: "price",
     center: true,
+    cell: (row) =>{
+      return <span style={{fontFamily:"roboto"}}>{row.price}</span>;
+    }
   },
   {
     name: <div className="text-center">PRODUCTION TIME</div>,
-    selector: "productionTime",
+    // selector: "productionTime",
     center: true,
+    cell: (row) =>{
+      return <span style={{fontFamily:"roboto"}}>{row.productionTime}</span>;
+    }
   },
   {
     name: "LIVE STATUS",
     center: true,
     cell: (row) => {
       if (row.liveStatus === "Live Now") {
-        return <span style={{ color: "rgb(59, 160, 128)" }}>Live Now</span>;
+        return <span style={{ color: "rgb(59, 160, 128)",fontFamily:"roboto" }}>Live Now</span>;
       }
       if (row.liveStatus === "Soon") {
-        return <span style={{ color: "rgb(243, 198, 75)" }}>Soon</span>;
+        return <span style={{ color: "rgb(243, 198, 75)",fontFamily:"roboto" }}>Soon</span>;
       }
       if (row.liveStatus === "Lived") {
-        return <span style={{ color: "rgb(170, 170, 170)" }}>Lived</span>;
+        return <span style={{ color: "rgb(170, 170, 170)",fontFamily:"roboto" }}>Lived</span>;
       } else {
         return <span>-</span>;
       }
@@ -85,7 +100,7 @@ const columns = [
       let liveOpenTime = momentJs(row.liveOpenTime).format('hh:mm')
       let liveCloseTime = momentJs(row.liveCloseTime).format('hh:mm')
       return (
-        <div>
+        <div style={{fontFamily:"roboto"}}>
           {liveOpenTime} -{" "}{liveCloseTime}
         </div>
       );
@@ -97,7 +112,7 @@ const columns = [
     center: true,
     cell: (row) => {
       return (
-        <div>
+        <div style={{fontFamily:"roboto"}}>
           <Moment format="ll">{row.liveOpenTime}</Moment>
         </div>
       );

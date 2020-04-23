@@ -76,3 +76,18 @@ select:focus
 .cancel:hover {
   background-color: rgb(50, 66, 113) !important;
 }
+
+input .forom-control{
+  height: unset;
+}
+
+.input-group-prepend{
+  border: unset !important;
+}
+
+input:focus
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
