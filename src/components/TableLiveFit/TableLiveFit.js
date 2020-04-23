@@ -196,6 +196,13 @@ export class Table extends Component {
     });
   };
 
+  numberWithCommas = (num) => {
+    var num_parts = num.toString().split(".");
+    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num_parts.join(".");
+  }
+
+
   handleTotalPage = async () => {
     let gymId = localStorage.getItem("user");
     gymId = JSON.parse(gymId).gym_id;
@@ -233,7 +240,7 @@ export class Table extends Component {
             index: this.state.page * 10 + (index + 1) - 10,
             className: val.name,
             trainer: val.trainer_name,
-            price: val.snappink_price,
+            price: this.numberWithCommas(val.snappink_price),
             productionTime: val.exp_day_amt,
             liveStatus: val.live_status,
             liveOpenTime: val.live_open_time,
