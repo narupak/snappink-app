@@ -266,7 +266,7 @@ export class Table extends Component {
             className: val.name,
             trainer: val.trainer_name,
             price: this.numberWithCommas(val.snappink_price),
-            productionTime: val.exp_day_amt,
+            productionTime: val.course_times,
             liveStatus: val.live_status,
             liveOpenTime: val.live_open_time,
             liveCloseTime: val.live_close_time,
