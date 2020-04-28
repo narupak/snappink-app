@@ -7,8 +7,8 @@ import Pagination from "react-js-pagination";
 import axios from "axios";
 import logoNoData from "./icons/partner-nodata-ico.5048444f.svg";
 import { Link } from "react-router-dom";
-import momentJs from 'moment';
-import Moment from 'react-moment';
+import momentJs from "moment";
+import Moment from "react-moment";
 import {
   InputGroup,
   Button,
@@ -38,55 +38,67 @@ const columns = [
     // selector: "index",
     center: true,
     width: "5%",
-    cell: (row) =>{
-      return <span style={{fontFamily:"roboto"}}>{row.index}</span>;
-    }
+    cell: (row) => {
+      return <span style={{ fontFamily: "roboto" }}>{row.index}</span>;
+    },
   },
   {
     name: "CLASSNAME",
     // selector: "className",
     sortable: true,
     width: "17%",
-    cell: (row) =>{
-      return <span style={{fontFamily:"roboto"}}>{row.className}</span>;
-    }
+    cell: (row) => {
+      return <span style={{ fontFamily: "roboto" }}>{row.className}</span>;
+    },
   },
   {
     name: "TRAINER",
     // selector: "trainer",
     width: "17%",
-    cell: (row) =>{
-      return <span style={{fontFamily:"roboto"}}>{row.trainer}</span>;
-    }
+    cell: (row) => {
+      return <span style={{ fontFamily: "roboto" }}>{row.trainer}</span>;
+    },
   },
   {
     name: <div className="text-center">PRICE (THB)</div>,
     // selector: "price",
     center: true,
-    cell: (row) =>{
-      return <span style={{fontFamily:"roboto"}}>{row.price}</span>;
-    }
+    cell: (row) => {
+      return <span style={{ fontFamily: "roboto" }}>{row.price}</span>;
+    },
   },
   {
     name: <div className="text-center">PRODUCTION TIME</div>,
     // selector: "productionTime",
     center: true,
-    cell: (row) =>{
-      return <span style={{fontFamily:"roboto"}}>{row.productionTime}</span>;
-    }
+    cell: (row) => {
+      return <span style={{ fontFamily: "roboto" }}>{row.productionTime}</span>;
+    },
   },
   {
     name: "LIVE STATUS",
     center: true,
     cell: (row) => {
       if (row.liveStatus === "Live Now") {
-        return <span style={{ color: "rgb(59, 160, 128)",fontFamily:"roboto" }}>Live Now</span>;
+        return (
+          <span style={{ color: "rgb(59, 160, 128)", fontFamily: "roboto" }}>
+            Live Now
+          </span>
+        );
       }
       if (row.liveStatus === "Soon") {
-        return <span style={{ color: "rgb(243, 198, 75)",fontFamily:"roboto" }}>Soon</span>;
+        return (
+          <span style={{ color: "rgb(243, 198, 75)", fontFamily: "roboto" }}>
+            Soon
+          </span>
+        );
       }
       if (row.liveStatus === "Lived") {
-        return <span style={{ color: "rgb(170, 170, 170)",fontFamily:"roboto" }}>Lived</span>;
+        return (
+          <span style={{ color: "rgb(170, 170, 170)", fontFamily: "roboto" }}>
+            Lived
+          </span>
+        );
       } else {
         return <span>-</span>;
       }
@@ -96,12 +108,12 @@ const columns = [
     name: "LIVE TIME",
     center: true,
     cell: (row) => {
-      console.log(row.liveOpenTime)
-      let liveOpenTime = momentJs(row.liveOpenTime).format('hh:mm')
-      let liveCloseTime = momentJs(row.liveCloseTime).format('hh:mm')
+      console.log(row.liveOpenTime);
+      let liveOpenTime = momentJs(row.liveOpenTime).format("hh:mm");
+      let liveCloseTime = momentJs(row.liveCloseTime).format("hh:mm");
       return (
-        <div style={{fontFamily:"roboto"}}>
-          {liveOpenTime} -{" "}{liveCloseTime}
+        <div style={{ fontFamily: "roboto" }}>
+          {liveOpenTime} - {liveCloseTime}
         </div>
       );
     },
@@ -112,7 +124,7 @@ const columns = [
     center: true,
     cell: (row) => {
       return (
-        <div style={{fontFamily:"roboto"}}>
+        <div style={{ fontFamily: "roboto" }}>
           <Moment format="ll">{row.liveOpenTime}</Moment>
         </div>
       );
@@ -200,16 +212,22 @@ export class Table extends Component {
     var num_parts = num.toString().split(".");
     num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return num_parts.join(".");
-  }
-
+  };
 
   handleTotalPage = async () => {
     let gymId = localStorage.getItem("user");
+    let token = JSON.parse(gymId).token;
     gymId = JSON.parse(gymId).gym_id;
     gymId = "gym_id=" + gymId;
     let url = this.state.url + gymId;
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(url,{
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          token: token,
+        },
+      });
       response.data.result.total &&
         this.setState({ totalPage: response.data.result.total });
     } catch (error) {
@@ -227,11 +245,18 @@ export class Table extends Component {
       sort = this.state.sort === "asc" ? "&sort_by=name" : "&sort_by=-name";
     }
     let gymId = localStorage.getItem("user");
+    let token = JSON.parse(gymId).token;
     gymId = JSON.parse(gymId).gym_id;
     gymId = "gym_id=" + gymId;
     let url = this.state.url + gymId + page + size + search + objFlag + sort;
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          token: token,
+        },
+      });
       if (response.status === 200) {
         // console.log(response);
         const res = response.data.result.items.map((val, index) => {
@@ -291,18 +316,17 @@ export class Table extends Component {
       "https://api-staging.snappink.com/api/gym_class/v1/" + this.state.delId;
     let token = localStorage.getItem("user");
     token = JSON.parse(token).token;
-    let header = {headers: {token: token }}
+    let header = { headers: { token: token } };
 
     axios
-        .delete(url,header)
-        .then(res => {
-          this.handleTable()
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    };
-  
+      .delete(url, header)
+      .then((res) => {
+        this.handleTable();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   hadleDelClass = () => {
     this.setState(
@@ -364,7 +388,8 @@ export class Table extends Component {
           }}
           onRowClicked={(row) => {
             if (row.liveStatus === "Live Now") {
-              window.location.href = "startLive/" + row.classId + "/" + row.className;
+              window.location.href =
+                "startLive/" + row.classId + "/" + row.className;
             }
           }}
           noDataComponent={
